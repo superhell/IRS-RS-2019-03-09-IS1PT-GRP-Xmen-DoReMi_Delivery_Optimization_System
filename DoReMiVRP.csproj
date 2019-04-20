@@ -40,7 +40,7 @@
       <HintPath>Lib\Accord.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Accord.Genetic">
-      <HintPath>..\DoReMiVRP_TSP\Lib\Accord.Genetic.dll</HintPath>
+      <HintPath>Lib\Accord.Genetic.dll</HintPath>
     </Reference>
     <Reference Include="Accord.MachineLearning">
       <HintPath>Lib\Accord.MachineLearning.dll</HintPath>
