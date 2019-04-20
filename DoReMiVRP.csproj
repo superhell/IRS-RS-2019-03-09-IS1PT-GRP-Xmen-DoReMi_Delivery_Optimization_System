@@ -40,7 +40,7 @@
       <HintPath>Lib\Accord.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Accord.Genetic">
-      <HintPath>Lib\Accord.Genetic.dll</HintPath>
+      <HintPath>..\DoReMiVRP_TSP\Lib\Accord.Genetic.dll</HintPath>
     </Reference>
     <Reference Include="Accord.MachineLearning">
       <HintPath>Lib\Accord.MachineLearning.dll</HintPath>
@@ -119,20 +119,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\logo.psd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iowa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\iowa_map.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -43,9 +43,10 @@ namespace CustomWindowsForm
         KMeans kmeans;
         int ClusterCount = 4;
         double[][][] data;
+        bool IsBlackWhite = false;
 
         GeneticAlgorithm GA = new GeneticAlgorithm();
-
+        Sys.Tool.VehiclePlan VehiclePlan = new Sys.Tool.VehiclePlan(6);
 
         public MainForm()
         {
@@ -83,11 +84,12 @@ namespace CustomWindowsForm
             this.BtnKMeans.Click += new System.EventHandler(this.BtnKMeans_Click);
             this.BtnGMM.Click += new System.EventHandler(this.BtnGMM_Click);
             this.btnReset.Click += BtnReset_Click;
+            this.chkBWMap.CheckedChanged += new System.EventHandler(this.chkBWMap_CheckedChanged);
 
             this.mapgraph.MouseMove += Mapgraph_MouseMove;
             this.mapgraph.Click += Mapgraph_Click;
 
-            this.panelRight.Width = 160; //must not be changed
+            this.panelRight.Width = 220; //must not be changed
             this.panelSide.Width = 160; //must not be changed
             this.Width = 1400; //must not be changed
             this.Height = 900; //must not be changed
@@ -108,8 +110,16 @@ namespace CustomWindowsForm
             SetCoordinates(x, y);
         }
 
-       
 
+        private void chkBWMap_CheckedChanged(object sender, EventArgs e)
+        {
+           
+            IsBlackWhite = (chkBWMap.Checked == true);
+           
+            SetBackgroundImage();
+          
+
+        }
 
         private void Mapgraph_Click(object sender, EventArgs e)
         {
@@ -169,6 +179,14 @@ namespace CustomWindowsForm
 
         private void Init()
         {
+            VehiclePlan.Add(1, Truck.EnumTruckType.Class6 ,"Tim J. Kelly", "EF6334K");
+            VehiclePlan.Add(2, Truck.EnumTruckType.Class7, "Thomas S. Matthhew", "BG4409");
+            VehiclePlan.Add(3, Truck.EnumTruckType.Class8, "Williams Barley", "KJJ3319");
+
+            VehiclePlan.Add(4, Truck.EnumTruckType.Class6, "John Joe D.", "HT67852");
+            VehiclePlan.Add(5, Truck.EnumTruckType.Class7, "Bill Dale", "KV4587");
+            VehiclePlan.Add(6, Truck.EnumTruckType.Class8, "Jummy K Lee", "BT7679");
+           
             GenerateMapData();
 
             mapgraph.GraphPane.Chart.Fill.IsVisible = true;
@@ -192,6 +210,10 @@ namespace CustomWindowsForm
             mapgraph.GraphPane.YAxis.MajorGrid.IsVisible = true;
             mapgraph.GraphPane.XAxis.MinorGrid.IsVisible = true;
             mapgraph.GraphPane.YAxis.MinorGrid.IsVisible = true;
+
+            //clear all previous distance measurements
+            mapgraph.GraphPane.GraphObjList.Clear();
+
         }
 
         private void GA_OnIterationLoop(EventArgsIterationLoop obj)
@@ -210,7 +232,7 @@ namespace CustomWindowsForm
             //double[][][] data = new double[k][][];
             data = new double[k][][];
 
-            Sys.Tool.KmeansCluster.SetUpMap("iowa_map.txt",4); // do not use, I will be working on this - Chad
+            Sys.Tool.KmeansCluster.SetUpMap("iowa_map.txt",ClusterCount); // do not use, I will be working on this - Chad
 
             for (int i = 0; i < k; i++)
             {
@@ -260,6 +282,15 @@ namespace CustomWindowsForm
             //mapgraph.GraphPane.Fill = new Fill(texBrush);
         }
 
+        private void SetBackgroundImage()
+        {
+            string file = "iowa.png";
+            if (IsBlackWhite) { file="iowa_bw.png"; } 
+            System.Drawing.Image img = System.Drawing.Bitmap.FromFile(file);
+            TextureBrush texBrush = new TextureBrush(img);
+            mapgraph.GraphPane.Fill = new Fill(texBrush);
+            mapgraph.Invalidate();
+        }
 
         //*************************************************************
         //This will not be used for the project
@@ -300,10 +331,12 @@ namespace CustomWindowsForm
 
 
             //***********************************************
-            //Reset all drawings
+            //Reset 
             //***********************************************
+            //all drawings
             CreateScatterplot(mapgraph, observations, k, false);
-
+            //Vehicle assignment
+            VehiclePlan.ClearAssignment();
             //***********************************************
 
             kmeans = new KMeans(k);
@@ -320,10 +353,11 @@ namespace CustomWindowsForm
             //for each cluster data, GA.LoadMap and Start() processing
             //For each iteration completed, an event is fired and the UI thread will draw updates on mapgraph
 
-         
+            //clear all previous distance measurements
+            mapgraph.GraphPane.GraphObjList.Clear();
 
             foreach (var obj in Sys.Tool.KmeansCluster.ClusteredObjects)
-            {
+            {               
                 GA.LoadMap(obj);
                 GA.Start();
             }
@@ -359,56 +393,65 @@ namespace CustomWindowsForm
 
                 //*************************************************************************
                 // Store clustered points for creating the final TSP
+                // Depot - center point, weight  not required
                 //*************************************************************************
                 if (Item.Color == Color.FromArgb(0, 0, 51)) {
                     Item.Color = Color.OrangeRed;
                     //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]));
+                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
                 if (Item.Color == Color.FromArgb(0, 0, 255)) {
                     Item.Color = Color.Blue;
                     //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]));
+                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
                 if (Item.Color == Color.FromArgb(255, 0, 0)) {
                     Item.Color = Color.DarkRed;
                     //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]));
+                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
                 if (Item.Color == Color.FromArgb(0, 255, 0)) {
                     Item.Color = Color.Green;
                     //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]));
+                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
+                //*************************************************************************
 
 
-  
 
 
                 //***************
                 if (Item.Color == Color.OrangeRed)
                 {
-                    ClusterData obj = new ClusterData(Item.Color, (float)point[0], (float)point[1]);
+                    float x = (float)point[0]; float y = (float)point[1];
+                    CityData C = Sys.Tool.KmeansCluster.GetCityData(x, y);
+                    ClusterData obj = new ClusterData(Item.Color, x, y, C.Quantity);
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
                 if (Item.Color == Color.Blue)
                 {
-                    ClusterData obj = new ClusterData(Item.Color, (float)point[0], (float)point[1]);
+                    float x = (float)point[0]; float y = (float)point[1];
+                    CityData C = Sys.Tool.KmeansCluster.GetCityData(x, y);
+                    ClusterData obj = new ClusterData(Item.Color,x, y, C.Quantity);
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
 
                 if (Item.Color == Color.DarkRed)
                 {
-                    ClusterData obj = new ClusterData(Item.Color, (float)point[0], (float)point[1]);
+                    float x = (float)point[0]; float y = (float)point[1];
+                    CityData C = Sys.Tool.KmeansCluster.GetCityData(x, y);
+                    ClusterData obj = new ClusterData(Item.Color, x, y, C.Quantity);
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
                 if (Item.Color == Color.Green)
                 {
-                    ClusterData obj = new ClusterData(Item.Color, (float)point[0], (float)point[1]);
+                    float x = (float)point[0]; float y = (float)point[1];
+                    CityData C = Sys.Tool.KmeansCluster.GetCityData(x, y);
+                    ClusterData obj = new ClusterData(Item.Color,x, y, C.Quantity);
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
                 //*************************************************************************
@@ -426,7 +469,7 @@ namespace CustomWindowsForm
 
             // Set graph pane object
             myPane.Title.IsVisible = true;
-            myPane.Title.Text = "Route Group PLan";
+            myPane.Title.Text = "Route Plan by Group";
             myPane.Title.FontSpec.Size = 10.0f;
              
             myPane.XAxis.Title.Text = "";
@@ -475,9 +518,10 @@ namespace CustomWindowsForm
             //myPane.Fill = new Fill(Color.WhiteSmoke);
             if (IsLoadBackground)
             {
-                System.Drawing.Image img = System.Drawing.Bitmap.FromFile("iowa.png");
-                TextureBrush texBrush = new TextureBrush(img);
-                mapgraph.GraphPane.Fill = new Fill(texBrush);
+                SetBackgroundImage();
+                //System.Drawing.Image img = System.Drawing.Bitmap.FromFile("iowa.png");
+                //TextureBrush texBrush = new TextureBrush(img);
+                //mapgraph.GraphPane.Fill = new Fill(texBrush);
             }
          
 
@@ -512,9 +556,7 @@ namespace CustomWindowsForm
         {
             GraphPane myPane = zgc.GraphPane;
 
-           
-
-
+            //*****************************************************
             LineItem curve;
 
             double[] x = path.GetColumn(0);
@@ -522,8 +564,40 @@ namespace CustomWindowsForm
 
             curve = myPane.AddCurve("", x, y, color, SymbolType.Plus);
             curve.Line.Width = 2.5F;
+            //*****************************************************
 
-            //zgc.Invalidate();
+            double distance = GA.CalculateTotalDistanceInKm(path);
+            distance = Math.Round(distance, 2);
+            Truck truck = Sys.Tool.KmeansCluster.ProcessVehicleAssignment(color, ref VehiclePlan);
+
+            double xp = x[6];
+            double yp = y[6];
+            int xf = 1; int yf = 1;
+            if (xp < 0) xf = -1 ; xp = xp - 0.25f * xf;  if (xp < -7.0f) xp = -7.0f; if (xp > 4.0f) xp = 4.0f;
+            if (yp < 0) yf = -1; yp = yp + 0.25f * xf;
+
+            TextObj text = new TextObj( "Total Distance: " + distance.ToString() + "km, \r\nDriver: "+ truck.DriverName + "\r\n Load: " + truck.LoadCapacity.ToString() + "\r\n Capacity: " + truck.Capacity.ToString() + "\r\n Truck: " + truck.TruckType.ToString(), xp , yp);            
+            // tell Zedgraph to use user scale units for locating the TextObj
+            text.Location.CoordinateFrame = CoordType.AxisXYScale;
+            text.FontSpec.Size = 6;
+            // AlignH the left-center of the text to the specified point
+            text.Location.AlignH = x[4] > 0 ? AlignH.Left : AlignH.Right;
+            text.Location.AlignV = AlignV.Center;
+            text.FontSpec.Border.IsVisible = true;
+
+          
+            text.FontSpec.Fill.Color = Color.FromArgb(220, 255, 255, 255);
+            text.FontSpec.Border.Color = Color.DarkGray;
+            text.FontSpec.Border.Width = 1;
+           
+            text.FontSpec.Angle = 0;           
+            text.FontSpec.Fill.IsVisible = true;
+            // add the TextObj to the list
+            myPane.GraphObjList.Add(text);
+            //*****************************************************
+          
+
+            zgc.Invalidate();
         }
 
         private void TopBorderPanel_MouseDown(object sender, MouseEventArgs e)
@@ -1033,6 +1107,6 @@ namespace CustomWindowsForm
             btnCompute_Click(sender, e);
         }
 
-        
+      
     }
 }

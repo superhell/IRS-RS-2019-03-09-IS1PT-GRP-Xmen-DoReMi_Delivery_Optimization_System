@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Accord.Genetic;
+using Accord.Math;
 using static Sys.Tool.GeneticAlgorithm;
 
 namespace Sys.Tool
@@ -50,8 +52,8 @@ namespace Sys.Tool
         } 
 
 
-        public void Start(EnumSelectionMethod selectionmethod = EnumSelectionMethod.Elite,
-                            int populationsize=100, int Iterations=50, bool IsgreedyCrossover = true)
+        public void Start(  EnumSelectionMethod selectionmethod = EnumSelectionMethod.Elite,
+                            int populationsize=100, int Iterations=50, bool IsgreedyCrossover = true )
         {
             // get population size
             this.populationSize = populationsize;
@@ -75,6 +77,35 @@ namespace Sys.Tool
 
         }
 
+        public double CalculateTotalDistanceInKm(double[,] path)
+        {
+            double f =  0.048647128049f;
+            double result = 0.0f;
+            int j = 0;
+            int count = path.GetColumn(0).Length -1;
+
+            try
+            {
+              
+                for (j = 0; j < count; j++)
+                {
+                    if (j < path.Length - 2)
+                    {
+                        double x = path[j + 1, 0] - path[j, 0];
+                        double y = path[j + 1, 1] - path[j, 1];
+                        double r = Math.Sqrt(Math.Pow(x, 2) + Math.Pow(y, 2));
+                        result += r;
+                    }
+                
+                }
+                return (result / f);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+           
+        }
 
         private void SearchSolution(System.Drawing.Color clusterColor)
         {
@@ -144,6 +175,7 @@ namespace Sys.Tool
         public bool greedyCrossover;
         public int citiesCount;
         public System.Drawing.Color color;
+        
     }
 
 }

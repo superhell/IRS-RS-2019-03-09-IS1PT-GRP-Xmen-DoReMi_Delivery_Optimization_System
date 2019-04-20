@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.maproutegraph = new ZedGraph.ZedGraphControl();
             this.panelSide = new System.Windows.Forms.Panel();
+            this.chkBWMap = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,21 +50,12 @@
             this.panelRight = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panelspace1 = new System.Windows.Forms.Panel();
-            this.HelpBtn = new CustomWindowsForm.ShapedButton();
             this.panel10 = new System.Windows.Forms.Panel();
-            this.BtnGMM = new CustomWindowsForm.ShapedButton();
-            this.btnReset = new CustomWindowsForm.ShapedButton();
-            this.shapedButton1 = new CustomWindowsForm.ShapedButton();
-            this.BtnKMeans = new CustomWindowsForm.ShapedButton();
-            this.CloseBtn = new CustomWindowsForm.ShapedButton();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.lbVersion = new System.Windows.Forms.Label();
             this.WindowTextLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.MinButton = new CustomWindowsForm.ButtonZ();
-            this.MaxButton = new CustomWindowsForm.MinMaxButton();
-            this.CloseButton = new CustomWindowsForm.ButtonZ();
             this.panel7 = new System.Windows.Forms.Panel();
             this.LeftTopPanel = new System.Windows.Forms.Panel();
             this.RightTopPanel = new System.Windows.Forms.Panel();
@@ -79,6 +71,15 @@
             this.view_button = new CustomWindowsForm.ButtonX();
             this.edit_button = new CustomWindowsForm.ButtonX();
             this.file_button = new CustomWindowsForm.ButtonX();
+            this.HelpBtn = new CustomWindowsForm.ShapedButton();
+            this.BtnGMM = new CustomWindowsForm.ShapedButton();
+            this.btnReset = new CustomWindowsForm.ShapedButton();
+            this.shapedButton1 = new CustomWindowsForm.ShapedButton();
+            this.BtnKMeans = new CustomWindowsForm.ShapedButton();
+            this.CloseBtn = new CustomWindowsForm.ShapedButton();
+            this.MinButton = new CustomWindowsForm.ButtonZ();
+            this.MaxButton = new CustomWindowsForm.MinMaxButton();
+            this.CloseButton = new CustomWindowsForm.ButtonZ();
             this.panel1.SuspendLayout();
             this.panelgraph.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -192,6 +193,7 @@
             // panelSide
             // 
             this.panelSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelSide.Controls.Add(this.chkBWMap);
             this.panelSide.Controls.Add(this.panel6);
             this.panelSide.Controls.Add(this.txtPoint2);
             this.panelSide.Controls.Add(this.txtPoint1);
@@ -199,8 +201,22 @@
             this.panelSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSide.Location = new System.Drawing.Point(0, 64);
             this.panelSide.Name = "panelSide";
+            this.panelSide.Padding = new System.Windows.Forms.Padding(4);
             this.panelSide.Size = new System.Drawing.Size(160, 762);
             this.panelSide.TabIndex = 42;
+            // 
+            // chkBWMap
+            // 
+            this.chkBWMap.AutoSize = true;
+            this.chkBWMap.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.chkBWMap.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBWMap.ForeColor = System.Drawing.Color.Silver;
+            this.chkBWMap.Location = new System.Drawing.Point(4, 624);
+            this.chkBWMap.Name = "chkBWMap";
+            this.chkBWMap.Size = new System.Drawing.Size(152, 20);
+            this.chkBWMap.TabIndex = 22;
+            this.chkBWMap.Text = "Black &&  White Map";
+            this.chkBWMap.UseVisualStyleBackColor = true;
             // 
             // panel6
             // 
@@ -210,9 +226,9 @@
             this.panel6.Controls.Add(this.txtXY);
             this.panel6.Controls.Add(this.txtFinal);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 648);
+            this.panel6.Location = new System.Drawing.Point(4, 644);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(160, 114);
+            this.panel6.Size = new System.Drawing.Size(152, 114);
             this.panel6.TabIndex = 25;
             // 
             // label2
@@ -280,9 +296,9 @@
             this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
+            this.panel4.Location = new System.Drawing.Point(4, 4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(160, 109);
+            this.panel4.Size = new System.Drawing.Size(152, 109);
             this.panel4.TabIndex = 20;
             // 
             // panelRight
@@ -325,37 +341,6 @@
             this.panelspace1.Size = new System.Drawing.Size(1398, 72);
             this.panelspace1.TabIndex = 12;
             // 
-            // HelpBtn
-            // 
-            this.HelpBtn.BackColor = System.Drawing.Color.Transparent;
-            this.HelpBtn.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.HelpBtn.ButtonText = "Help";
-            this.HelpBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.HelpBtn.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(40)))));
-            this.HelpBtn.FlatAppearance.BorderSize = 0;
-            this.HelpBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.HelpBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.HelpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HelpBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HelpBtn.ForeColor = System.Drawing.Color.White;
-            this.HelpBtn.GradientAngle = 90;
-            this.HelpBtn.Location = new System.Drawing.Point(590, 8);
-            this.HelpBtn.MouseClickColor1 = System.Drawing.Color.Black;
-            this.HelpBtn.MouseClickColor2 = System.Drawing.Color.Black;
-            this.HelpBtn.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(30)))));
-            this.HelpBtn.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(80)))));
-            this.HelpBtn.Name = "HelpBtn";
-            this.HelpBtn.ShowButtontext = true;
-            this.HelpBtn.Size = new System.Drawing.Size(145, 56);
-            this.HelpBtn.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(70)))), ((int)(((byte)(190)))));
-            this.HelpBtn.TabIndex = 21;
-            this.HelpBtn.Text = "HelpText";
-            this.HelpBtn.TextLocation_X = 51;
-            this.HelpBtn.TextLocation_Y = 18;
-            this.HelpBtn.Transparent1 = 250;
-            this.HelpBtn.Transparent2 = 250;
-            this.HelpBtn.UseVisualStyleBackColor = false;
-            // 
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
@@ -363,160 +348,6 @@
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(32, 56);
             this.panel10.TabIndex = 20;
-            // 
-            // BtnGMM
-            // 
-            this.BtnGMM.BackColor = System.Drawing.Color.Transparent;
-            this.BtnGMM.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.BtnGMM.ButtonText = "Use Gaussian MM";
-            this.BtnGMM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BtnGMM.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnGMM.FlatAppearance.BorderSize = 0;
-            this.BtnGMM.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnGMM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnGMM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnGMM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGMM.ForeColor = System.Drawing.Color.White;
-            this.BtnGMM.GradientAngle = 90;
-            this.BtnGMM.Location = new System.Drawing.Point(767, 8);
-            this.BtnGMM.MouseClickColor1 = System.Drawing.Color.Black;
-            this.BtnGMM.MouseClickColor2 = System.Drawing.Color.Black;
-            this.BtnGMM.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnGMM.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnGMM.Name = "BtnGMM";
-            this.BtnGMM.ShowButtontext = true;
-            this.BtnGMM.Size = new System.Drawing.Size(200, 56);
-            this.BtnGMM.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnGMM.TabIndex = 17;
-            this.BtnGMM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnGMM.TextLocation_X = 32;
-            this.BtnGMM.TextLocation_Y = 18;
-            this.BtnGMM.Transparent1 = 250;
-            this.BtnGMM.Transparent2 = 250;
-            this.BtnGMM.UseVisualStyleBackColor = false;
-            this.BtnGMM.Visible = false;
-            // 
-            // btnReset
-            // 
-            this.btnReset.BackColor = System.Drawing.Color.Transparent;
-            this.btnReset.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.btnReset.ButtonText = "Reset";
-            this.btnReset.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnReset.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnReset.FlatAppearance.BorderSize = 0;
-            this.btnReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.GradientAngle = 90;
-            this.btnReset.Location = new System.Drawing.Point(967, 8);
-            this.btnReset.MouseClickColor1 = System.Drawing.Color.Black;
-            this.btnReset.MouseClickColor2 = System.Drawing.Color.Black;
-            this.btnReset.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnReset.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnReset.Name = "btnReset";
-            this.btnReset.ShowButtontext = true;
-            this.btnReset.Size = new System.Drawing.Size(136, 56);
-            this.btnReset.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnReset.TabIndex = 16;
-            this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReset.TextLocation_X = 44;
-            this.btnReset.TextLocation_Y = 18;
-            this.btnReset.Transparent1 = 250;
-            this.btnReset.Transparent2 = 250;
-            this.btnReset.UseVisualStyleBackColor = false;
-            // 
-            // shapedButton1
-            // 
-            this.shapedButton1.BackColor = System.Drawing.Color.Transparent;
-            this.shapedButton1.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.Circle;
-            this.shapedButton1.ButtonText = "+";
-            this.shapedButton1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.shapedButton1.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.shapedButton1.FlatAppearance.BorderSize = 0;
-            this.shapedButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.shapedButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.shapedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.shapedButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shapedButton1.ForeColor = System.Drawing.Color.White;
-            this.shapedButton1.GradientAngle = 90;
-            this.shapedButton1.Location = new System.Drawing.Point(3, 8);
-            this.shapedButton1.MouseClickColor1 = System.Drawing.Color.Black;
-            this.shapedButton1.MouseClickColor2 = System.Drawing.Color.Black;
-            this.shapedButton1.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.shapedButton1.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.shapedButton1.Name = "shapedButton1";
-            this.shapedButton1.ShowButtontext = true;
-            this.shapedButton1.Size = new System.Drawing.Size(59, 56);
-            this.shapedButton1.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.shapedButton1.TabIndex = 6;
-            this.shapedButton1.TextLocation_X = 14;
-            this.shapedButton1.TextLocation_Y = 7;
-            this.shapedButton1.Transparent1 = 250;
-            this.shapedButton1.Transparent2 = 250;
-            this.shapedButton1.UseVisualStyleBackColor = false;
-            // 
-            // BtnKMeans
-            // 
-            this.BtnKMeans.BackColor = System.Drawing.Color.Transparent;
-            this.BtnKMeans.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.BtnKMeans.ButtonText = "Use K Means";
-            this.BtnKMeans.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BtnKMeans.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnKMeans.FlatAppearance.BorderSize = 0;
-            this.BtnKMeans.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnKMeans.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnKMeans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnKMeans.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnKMeans.ForeColor = System.Drawing.Color.White;
-            this.BtnKMeans.GradientAngle = 90;
-            this.BtnKMeans.Location = new System.Drawing.Point(1103, 8);
-            this.BtnKMeans.MouseClickColor1 = System.Drawing.Color.Black;
-            this.BtnKMeans.MouseClickColor2 = System.Drawing.Color.Black;
-            this.BtnKMeans.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnKMeans.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnKMeans.Name = "BtnKMeans";
-            this.BtnKMeans.ShowButtontext = true;
-            this.BtnKMeans.Size = new System.Drawing.Size(156, 56);
-            this.BtnKMeans.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnKMeans.TabIndex = 10;
-            this.BtnKMeans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnKMeans.TextLocation_X = 24;
-            this.BtnKMeans.TextLocation_Y = 18;
-            this.BtnKMeans.Transparent1 = 250;
-            this.BtnKMeans.Transparent2 = 250;
-            this.BtnKMeans.UseVisualStyleBackColor = false;
-            // 
-            // CloseBtn
-            // 
-            this.CloseBtn.BackColor = System.Drawing.Color.Transparent;
-            this.CloseBtn.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.CloseBtn.ButtonText = "Close";
-            this.CloseBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.CloseBtn.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.CloseBtn.FlatAppearance.BorderSize = 0;
-            this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseBtn.ForeColor = System.Drawing.Color.White;
-            this.CloseBtn.GradientAngle = 90;
-            this.CloseBtn.Location = new System.Drawing.Point(1259, 8);
-            this.CloseBtn.MouseClickColor1 = System.Drawing.Color.Black;
-            this.CloseBtn.MouseClickColor2 = System.Drawing.Color.Black;
-            this.CloseBtn.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.CloseBtn.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.CloseBtn.Name = "CloseBtn";
-            this.CloseBtn.ShowButtontext = true;
-            this.CloseBtn.Size = new System.Drawing.Size(136, 56);
-            this.CloseBtn.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.CloseBtn.TabIndex = 9;
-            this.CloseBtn.TextLocation_X = 44;
-            this.CloseBtn.TextLocation_Y = 18;
-            this.CloseBtn.Transparent1 = 250;
-            this.CloseBtn.Transparent2 = 250;
-            this.CloseBtn.UseVisualStyleBackColor = false;
             // 
             // TopPanel
             // 
@@ -570,63 +401,6 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(148, 36);
             this.panel5.TabIndex = 8;
-            // 
-            // MinButton
-            // 
-            this.MinButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.MinButton.DisplayText = "_";
-            this.MinButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MinButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MinButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinButton.ForeColor = System.Drawing.Color.White;
-            this.MinButton.Location = new System.Drawing.Point(55, 0);
-            this.MinButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
-            this.MinButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.MinButton.Name = "MinButton";
-            this.MinButton.Size = new System.Drawing.Size(31, 36);
-            this.MinButton.TabIndex = 10;
-            this.MinButton.Text = "_";
-            this.MinButton.TextLocation_X = 6;
-            this.MinButton.TextLocation_Y = -20;
-            this.MinButton.UseVisualStyleBackColor = true;
-            // 
-            // MaxButton
-            // 
-            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.MaxButton.CFormState = CustomWindowsForm.MinMaxButton.CustomFormState.Normal;
-            this.MaxButton.DisplayText = "_";
-            this.MaxButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MaxButton.ForeColor = System.Drawing.Color.White;
-            this.MaxButton.Location = new System.Drawing.Point(86, 0);
-            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
-            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.MaxButton.Name = "MaxButton";
-            this.MaxButton.Size = new System.Drawing.Size(31, 36);
-            this.MaxButton.TabIndex = 9;
-            this.MaxButton.Text = "minMaxButton1";
-            this.MaxButton.TextLocation_X = 8;
-            this.MaxButton.TextLocation_Y = 6;
-            this.MaxButton.UseVisualStyleBackColor = true;
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.CloseButton.DisplayText = "X";
-            this.CloseButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseButton.ForeColor = System.Drawing.Color.White;
-            this.CloseButton.Location = new System.Drawing.Point(117, 0);
-            this.CloseButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
-            this.CloseButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(31, 36);
-            this.CloseButton.TabIndex = 8;
-            this.CloseButton.Text = "X";
-            this.CloseButton.TextLocation_X = 6;
-            this.CloseButton.TextLocation_Y = 1;
-            this.CloseButton.UseVisualStyleBackColor = true;
             // 
             // panel7
             // 
@@ -825,6 +599,248 @@
             this.file_button.TextLocation_Y = 6;
             this.file_button.UseVisualStyleBackColor = true;
             // 
+            // HelpBtn
+            // 
+            this.HelpBtn.BackColor = System.Drawing.Color.Transparent;
+            this.HelpBtn.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
+            this.HelpBtn.ButtonText = "Help";
+            this.HelpBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.HelpBtn.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(40)))));
+            this.HelpBtn.FlatAppearance.BorderSize = 0;
+            this.HelpBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.HelpBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.HelpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.HelpBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HelpBtn.ForeColor = System.Drawing.Color.White;
+            this.HelpBtn.GradientAngle = 90;
+            this.HelpBtn.Location = new System.Drawing.Point(590, 8);
+            this.HelpBtn.MouseClickColor1 = System.Drawing.Color.Black;
+            this.HelpBtn.MouseClickColor2 = System.Drawing.Color.Black;
+            this.HelpBtn.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(30)))));
+            this.HelpBtn.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(80)))));
+            this.HelpBtn.Name = "HelpBtn";
+            this.HelpBtn.ShowButtontext = true;
+            this.HelpBtn.Size = new System.Drawing.Size(145, 56);
+            this.HelpBtn.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(70)))), ((int)(((byte)(190)))));
+            this.HelpBtn.TabIndex = 21;
+            this.HelpBtn.Text = "HelpText";
+            this.HelpBtn.TextLocation_X = 51;
+            this.HelpBtn.TextLocation_Y = 18;
+            this.HelpBtn.Transparent1 = 250;
+            this.HelpBtn.Transparent2 = 250;
+            this.HelpBtn.UseVisualStyleBackColor = false;
+            // 
+            // BtnGMM
+            // 
+            this.BtnGMM.BackColor = System.Drawing.Color.Transparent;
+            this.BtnGMM.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
+            this.BtnGMM.ButtonText = "Use Gaussian MM";
+            this.BtnGMM.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnGMM.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BtnGMM.FlatAppearance.BorderSize = 0;
+            this.BtnGMM.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnGMM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnGMM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnGMM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnGMM.ForeColor = System.Drawing.Color.White;
+            this.BtnGMM.GradientAngle = 90;
+            this.BtnGMM.Location = new System.Drawing.Point(767, 8);
+            this.BtnGMM.MouseClickColor1 = System.Drawing.Color.Black;
+            this.BtnGMM.MouseClickColor2 = System.Drawing.Color.Black;
+            this.BtnGMM.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.BtnGMM.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.BtnGMM.Name = "BtnGMM";
+            this.BtnGMM.ShowButtontext = true;
+            this.BtnGMM.Size = new System.Drawing.Size(200, 56);
+            this.BtnGMM.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BtnGMM.TabIndex = 17;
+            this.BtnGMM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnGMM.TextLocation_X = 32;
+            this.BtnGMM.TextLocation_Y = 18;
+            this.BtnGMM.Transparent1 = 250;
+            this.BtnGMM.Transparent2 = 250;
+            this.BtnGMM.UseVisualStyleBackColor = false;
+            this.BtnGMM.Visible = false;
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.Transparent;
+            this.btnReset.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
+            this.btnReset.ButtonText = "Reset";
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnReset.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.GradientAngle = 90;
+            this.btnReset.Location = new System.Drawing.Point(967, 8);
+            this.btnReset.MouseClickColor1 = System.Drawing.Color.Black;
+            this.btnReset.MouseClickColor2 = System.Drawing.Color.Black;
+            this.btnReset.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnReset.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnReset.Name = "btnReset";
+            this.btnReset.ShowButtontext = true;
+            this.btnReset.Size = new System.Drawing.Size(136, 56);
+            this.btnReset.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnReset.TabIndex = 16;
+            this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReset.TextLocation_X = 44;
+            this.btnReset.TextLocation_Y = 18;
+            this.btnReset.Transparent1 = 250;
+            this.btnReset.Transparent2 = 250;
+            this.btnReset.UseVisualStyleBackColor = false;
+            // 
+            // shapedButton1
+            // 
+            this.shapedButton1.BackColor = System.Drawing.Color.Transparent;
+            this.shapedButton1.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.Circle;
+            this.shapedButton1.ButtonText = "+";
+            this.shapedButton1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.shapedButton1.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.shapedButton1.FlatAppearance.BorderSize = 0;
+            this.shapedButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.shapedButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.shapedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.shapedButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shapedButton1.ForeColor = System.Drawing.Color.White;
+            this.shapedButton1.GradientAngle = 90;
+            this.shapedButton1.Location = new System.Drawing.Point(3, 8);
+            this.shapedButton1.MouseClickColor1 = System.Drawing.Color.Black;
+            this.shapedButton1.MouseClickColor2 = System.Drawing.Color.Black;
+            this.shapedButton1.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.shapedButton1.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.shapedButton1.Name = "shapedButton1";
+            this.shapedButton1.ShowButtontext = true;
+            this.shapedButton1.Size = new System.Drawing.Size(59, 56);
+            this.shapedButton1.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.shapedButton1.TabIndex = 6;
+            this.shapedButton1.TextLocation_X = 14;
+            this.shapedButton1.TextLocation_Y = 7;
+            this.shapedButton1.Transparent1 = 250;
+            this.shapedButton1.Transparent2 = 250;
+            this.shapedButton1.UseVisualStyleBackColor = false;
+            // 
+            // BtnKMeans
+            // 
+            this.BtnKMeans.BackColor = System.Drawing.Color.Transparent;
+            this.BtnKMeans.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
+            this.BtnKMeans.ButtonText = "Use K Means";
+            this.BtnKMeans.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnKMeans.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BtnKMeans.FlatAppearance.BorderSize = 0;
+            this.BtnKMeans.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnKMeans.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnKMeans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnKMeans.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnKMeans.ForeColor = System.Drawing.Color.White;
+            this.BtnKMeans.GradientAngle = 90;
+            this.BtnKMeans.Location = new System.Drawing.Point(1103, 8);
+            this.BtnKMeans.MouseClickColor1 = System.Drawing.Color.Black;
+            this.BtnKMeans.MouseClickColor2 = System.Drawing.Color.Black;
+            this.BtnKMeans.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.BtnKMeans.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.BtnKMeans.Name = "BtnKMeans";
+            this.BtnKMeans.ShowButtontext = true;
+            this.BtnKMeans.Size = new System.Drawing.Size(156, 56);
+            this.BtnKMeans.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.BtnKMeans.TabIndex = 10;
+            this.BtnKMeans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.BtnKMeans.TextLocation_X = 24;
+            this.BtnKMeans.TextLocation_Y = 18;
+            this.BtnKMeans.Transparent1 = 250;
+            this.BtnKMeans.Transparent2 = 250;
+            this.BtnKMeans.UseVisualStyleBackColor = false;
+            // 
+            // CloseBtn
+            // 
+            this.CloseBtn.BackColor = System.Drawing.Color.Transparent;
+            this.CloseBtn.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
+            this.CloseBtn.ButtonText = "Close";
+            this.CloseBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CloseBtn.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.CloseBtn.FlatAppearance.BorderSize = 0;
+            this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseBtn.ForeColor = System.Drawing.Color.White;
+            this.CloseBtn.GradientAngle = 90;
+            this.CloseBtn.Location = new System.Drawing.Point(1259, 8);
+            this.CloseBtn.MouseClickColor1 = System.Drawing.Color.Black;
+            this.CloseBtn.MouseClickColor2 = System.Drawing.Color.Black;
+            this.CloseBtn.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.CloseBtn.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.CloseBtn.Name = "CloseBtn";
+            this.CloseBtn.ShowButtontext = true;
+            this.CloseBtn.Size = new System.Drawing.Size(136, 56);
+            this.CloseBtn.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.CloseBtn.TabIndex = 9;
+            this.CloseBtn.TextLocation_X = 44;
+            this.CloseBtn.TextLocation_Y = 18;
+            this.CloseBtn.Transparent1 = 250;
+            this.CloseBtn.Transparent2 = 250;
+            this.CloseBtn.UseVisualStyleBackColor = false;
+            // 
+            // MinButton
+            // 
+            this.MinButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.MinButton.DisplayText = "_";
+            this.MinButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MinButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinButton.ForeColor = System.Drawing.Color.White;
+            this.MinButton.Location = new System.Drawing.Point(55, 0);
+            this.MinButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
+            this.MinButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.MinButton.Name = "MinButton";
+            this.MinButton.Size = new System.Drawing.Size(31, 36);
+            this.MinButton.TabIndex = 10;
+            this.MinButton.Text = "_";
+            this.MinButton.TextLocation_X = 6;
+            this.MinButton.TextLocation_Y = -20;
+            this.MinButton.UseVisualStyleBackColor = true;
+            // 
+            // MaxButton
+            // 
+            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.MaxButton.CFormState = CustomWindowsForm.MinMaxButton.CustomFormState.Normal;
+            this.MaxButton.DisplayText = "_";
+            this.MaxButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MaxButton.ForeColor = System.Drawing.Color.White;
+            this.MaxButton.Location = new System.Drawing.Point(86, 0);
+            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
+            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.MaxButton.Name = "MaxButton";
+            this.MaxButton.Size = new System.Drawing.Size(31, 36);
+            this.MaxButton.TabIndex = 9;
+            this.MaxButton.Text = "minMaxButton1";
+            this.MaxButton.TextLocation_X = 8;
+            this.MaxButton.TextLocation_Y = 6;
+            this.MaxButton.UseVisualStyleBackColor = true;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.CloseButton.DisplayText = "X";
+            this.CloseButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseButton.ForeColor = System.Drawing.Color.White;
+            this.CloseButton.Location = new System.Drawing.Point(117, 0);
+            this.CloseButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
+            this.CloseButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(31, 36);
+            this.CloseButton.TabIndex = 8;
+            this.CloseButton.Text = "X";
+            this.CloseButton.TextLocation_X = 6;
+            this.CloseButton.TextLocation_Y = 1;
+            this.CloseButton.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -913,5 +929,6 @@
         private ButtonX view_button;
         private ButtonX edit_button;
         private ButtonX file_button;
+        private System.Windows.Forms.CheckBox chkBWMap;
     }
 }
