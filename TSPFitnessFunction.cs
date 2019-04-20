@@ -1,10 +1,3 @@
-// AForge Framework
-// Traveling Salesman Problem using Genetic Algorithms
-//
-// Copyright ?Andrew Kirillov, 2006-2008
-// andrew.kirillov@gmail.com
-//
-
 using System;
 using Accord.Genetic;
 

@@ -1,11 +1,3 @@
-// Traveling Salesman Problem using Genetic Algorithms
-// AForge.NET framework
-// http://www.aforgenet.com/framework/
-//
-// Copyright ?AForge.NET, 2006-2011
-// contacts@aforgenet.com
-//
-
 using System;
 using Accord.Genetic;
 using Accord.Math.Random;
@@ -75,6 +67,7 @@ namespace Sys.Tool
                 p.val = child2;
             }
         }
+
 
         // Produce new child applying crossover to two parents
         private void CreateChildUsingCrossover(ushort[] parent1, ushort[] parent2, ushort[] child)
@@ -159,5 +152,103 @@ namespace Sys.Tool
                 geneIsBusy[prev] = true;
             }
         }
+
+        public override void Mutate()
+        {
+
+            // Mutation rate
+            int MutateRate = 0;
+            int Rate1 = Generator.Random.Next(0, 100);
+            if (Rate1 < MutateRate)
+            {
+                ushort[] child = new ushort[length];
+                // create child
+                CreateChildUsingMutate(this.val, child);
+
+                // replace parents with children
+                this.val = child;
+            }
+
+            // Natural disaster rate
+            int DisasterRate = 0;
+            int Rate2 = Generator.Random.Next(0, 10000);
+            if (Rate2 < DisasterRate)
+            {
+                ushort[] NewSpecies = new ushort[length];
+                // create NewSpecies
+                OccasionalDisaster(this.val, NewSpecies);
+
+                // replace parents with NewSpecies
+                this.val = NewSpecies;
+            }
+
+            // Vaccination
+            ushort[] vaccination = new ushort[length];
+
+        }
+        // Produce new child applying mutation to one parent
+        private void CreateChildUsingMutate(ushort[] parent, ushort[] child)
+        {
+            int k = Generator.Random.Next(2, length);
+
+            // Random exchange gene from parent to child
+            for (int i = 0; i < length; i++)
+            {
+                child[i] = parent[i];
+            }
+
+            child[k] = parent[k - 1];
+            child[k - 1] = parent[k];
+
+        }
+
+
+        // Produce occasional disaster
+        private void OccasionalDisaster(ushort[] parent, ushort[] NewSpecies)
+        {
+            bool[] geneIsBusy = new bool[length];
+            int k = Generator.Random.Next(0, length);
+            // Random generate new chromosome
+            for (int i = 1; i < length; i++)
+            {
+                while (geneIsBusy[k] == true)
+                { k = Generator.Random.Next(0, length); }
+                NewSpecies[i] = (ushort)(k);
+                geneIsBusy[k] = true;
+                Console.WriteLine(k);
+            }
+        }
+
+
+        private int Vaccination(ushort[] child)
+        {
+            int tot = 0;
+
+            for (int i = 0; i < length; i++)
+            {
+                double dx1 = map[i, 0] - map[0, 0];
+                double dy1 = map[i, 1] - map[0, 1];
+
+                tot = tot + (int)Math.Sqrt(dx1 * dx1 + dy1 * dy1);
+
+            }
+
+            ushort Mean = (ushort)(tot / length);
+
+            double dx = map[1, 0] - map[0, 0];
+            double dy = map[1, 1] - map[0, 1];
+
+            ushort Eval = (ushort)Math.Sqrt(dx * dx + dy * dy);
+
+            if (Eval < Mean)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
     }
 }
