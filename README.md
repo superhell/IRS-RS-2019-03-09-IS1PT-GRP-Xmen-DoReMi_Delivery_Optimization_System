@@ -18,7 +18,7 @@ Project introduction here
 ![DoReMi Vehicle Routing Problem](SystemCode/doc/DoReMiVRP.jpg)
 
 ## Video
-![Video Link](https://youtu.be/ogLJWlWqs0M)
+[Video Link](https://youtu.be/ogLJWlWqs0M)
 
 ## Development Tools & Environment
 ### Tools
