@@ -9,9 +9,6 @@
 
 ## REPORT.pdf contains:
 * Main report
-* Annex A - scenarios of our system
-* Annex B - User manual
-* Annex C - video
 
 Project introduction here
 
@@ -29,6 +26,8 @@ Project introduction here
 * Clone this repo
 * Open DoReMiVRP.sln
 * Click Start
+* You could click "Help" button on how to use this program
+![Help](SystemCode/doc/Help.jpg)
 
 ## Credit
 [Accord.NET Framework](http://accord-framework.net/)
