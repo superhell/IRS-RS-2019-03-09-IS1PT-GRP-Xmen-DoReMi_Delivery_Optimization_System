@@ -1,5 +1,7 @@
 # DoReMi Delivery Optimization System
 
+![DoReMi Vehicle Routing Problem](SystemCode/doc/DoReMiVRP.jpg)
+
 ## Project members of Institute of Systems Science, National University of Singapore:
 * Chad
 * Jin Xin
@@ -18,8 +20,6 @@ Our primary objective is to apply the search and optimization techniques in DoRe
 ## REPORT.pdf contains:
 * Main report
 
-![DoReMi Vehicle Routing Problem](SystemCode/doc/DoReMiVRP.jpg)
-
 ## Video
 [Video Link](https://youtu.be/ogLJWlWqs0M)
 
@@ -30,7 +30,7 @@ Our primary objective is to apply the search and optimization techniques in DoRe
 ### Running Locally
 * Download Visual Studio 2017
 * Clone this repo
-* Open DoReMiVRP.sln
+* Open SystemCode/DoReMiVRP.sln
 * Click Start
 * You could click "Help" button on how to use this program
 ![Help](SystemCode/doc/Help.jpg)
