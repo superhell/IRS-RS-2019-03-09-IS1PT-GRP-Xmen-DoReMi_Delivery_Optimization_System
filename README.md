@@ -17,6 +17,9 @@ Project introduction here
 
 ![DoReMi Vehicle Routing Problem](SystemCode/doc/DoReMiVRP.jpg)
 
+## Video
+![Video Link](https://youtu.be/ogLJWlWqs0M)
+
 ## Development Tools & Environment
 ### Tools
 - **Visual Studio 2017 (Community Edition)**. (https://visualstudio.microsoft.com/) 
