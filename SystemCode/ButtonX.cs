@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 
-namespace CustomWindowsForm
+namespace DoReMiVRP
 {
     public class ButtonX : System.Windows.Forms.Button
     {

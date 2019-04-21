@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
-namespace CustomWindowsForm
+namespace DoReMiVRP
 {
     public class ButtonZ : System.Windows.Forms.Button
     {

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,10 +13,11 @@ using Accord.Controls;
 using Accord.MachineLearning;
 using Accord.Math;
 using Accord.Statistics.Distributions.Multivariate;
+ 
 using Sys.Tool;
 using ZedGraph;
 
-namespace CustomWindowsForm
+namespace DoReMiVRP
 {
     public partial class MainForm : Form
     {
@@ -32,6 +34,8 @@ namespace CustomWindowsForm
         bool isLeftTopPanelDragged = false;
 
         bool isWindowMaximized = false;
+      
+
         Point offset;
         Size _normalWindowSize;
         Point _normalWindowLocation = Point.Empty;
@@ -44,6 +48,7 @@ namespace CustomWindowsForm
         int ClusterCount = 4;
         double[][][] data;
         bool IsBlackWhite = false;
+        bool IsProcessStarted = false;
 
         GeneticAlgorithm GA = new GeneticAlgorithm();
         Sys.Tool.VehiclePlan VehiclePlan = new Sys.Tool.VehiclePlan(6);
@@ -76,27 +81,74 @@ namespace CustomWindowsForm
             this.RightBottomPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.RightBottomPanel_MouseMove);
             this.RightBottomPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.RightBottomPanel_MouseUp);
 
-            this.CloseButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CloseButton_MouseClick);
-            this.MaxButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MaxButton_MouseClick);
-            this.MinButton.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MinButton_MouseClick);
+            this.btnClose.MouseClick += BtnClose_MouseClick;
+            this.MaxButton.MouseClick += MaxButton_MouseClick;
+            this.MinButton.MouseClick +=  MinButton_MouseClick;
+            this.CloseButton.MouseClick += CloseButton_MouseClick;
 
-            this.CloseBtn.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CloseButton_MouseClick);
+
             this.BtnKMeans.Click += new System.EventHandler(this.BtnKMeans_Click);
-            this.BtnGMM.Click += new System.EventHandler(this.BtnGMM_Click);
+         
             this.btnReset.Click += BtnReset_Click;
             this.chkBWMap.CheckedChanged += new System.EventHandler(this.chkBWMap_CheckedChanged);
+            this.btnEntry.Click += new System.EventHandler(this.btnEntry_Click);
+            this.btnView.Click += new System.EventHandler(this.btnView_Click);
+            this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
 
             this.mapgraph.MouseMove += Mapgraph_MouseMove;
             this.mapgraph.Click += Mapgraph_Click;
+
+            cboClusterSize.SelectedIndexChanged += CboClusterSize_SelectedIndexChanged;
 
             this.panelRight.Width = 220; //must not be changed
             this.panelSide.Width = 160; //must not be changed
             this.Width = 1400; //must not be changed
             this.Height = 900; //must not be changed
+        
 
-           //Show mapgraph size
+            //Show mapgraph size
             txtXY.Text = mapgraph.Width.ToString() + "," + mapgraph.Height.ToString();
+            lblResult.Text = "";
+            lblResult.Visible = true;
+            lblSolution.Text = "";
+            lblSolution.Visible = true;
+
+            this.ProgressBar.Value = 0;
+            this.ProgressBar.Minimum = 0;
+            int n = Sys.Tool.KmeansCluster.RouteIterationMax;
+            this.ProgressBar.Maximum = n;
+            cboClusterSize.SelectedIndex =2;
+
+            SetupVehiclePlan();
         }
+
+         
+
+        private void CboClusterSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckDropDownClusterNo();
+        }
+
+        private void CheckDropDownClusterNo()
+        {
+            try
+            {
+                if (cboClusterSize.Text == "") { cboClusterSize.Text = "4"; }
+                if (cboClusterSize.Text.Trim() == "0") { cboClusterSize.Text = "4"; }
+                this.ClusterCount = int.Parse(cboClusterSize.Text);
+            }
+            catch (Exception e)
+            {
+                cboClusterSize.Text = "4"; this.ClusterCount = 4;
+            }
+        }
+        private void CloseButton_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Close();
+        }
+
+  
+       
 
         private void BtnReset_Click(object sender, EventArgs e)
         {
@@ -177,17 +229,31 @@ namespace CustomWindowsForm
             GA.OnIterationLoop += GA_OnIterationLoop;
         }
 
+        private void SetupVehiclePlan()
+        {
+            VehiclePlan.Add(1, Truck.EnumTruckType.Class4, "Tim J. Kelly", "EF6334K");
+            VehiclePlan.Add(2, Truck.EnumTruckType.Class5, "Thomas S. Matthhew", "BG4409");
+            VehiclePlan.Add(3, Truck.EnumTruckType.Class6, "Williams Barley", "KJJ3319");
+
+            VehiclePlan.Add(4, Truck.EnumTruckType.Class7, "John Joe D.", "HT67852");
+            VehiclePlan.Add(5, Truck.EnumTruckType.Class8, "Bill Dale", "KV4587");
+            VehiclePlan.Add(6, Truck.EnumTruckType.Class9, "Jimmy K Lee", "BT7679");
+        }
         private void Init()
         {
-            VehiclePlan.Add(1, Truck.EnumTruckType.Class6 ,"Tim J. Kelly", "EF6334K");
-            VehiclePlan.Add(2, Truck.EnumTruckType.Class7, "Thomas S. Matthhew", "BG4409");
-            VehiclePlan.Add(3, Truck.EnumTruckType.Class8, "Williams Barley", "KJJ3319");
+             
+          
+            k = this.ClusterCount;
 
-            VehiclePlan.Add(4, Truck.EnumTruckType.Class6, "John Joe D.", "HT67852");
-            VehiclePlan.Add(5, Truck.EnumTruckType.Class7, "Bill Dale", "KV4587");
-            VehiclePlan.Add(6, Truck.EnumTruckType.Class8, "Jummy K Lee", "BT7679");
-           
-            GenerateMapData();
+            Sys.Tool.KmeansCluster.Route.ClusterCount = ClusterCount;
+
+            lblResult.Text = "";
+            lblSolution.Text = "";
+            ProgressBar.Value = 0;
+            Sys.Tool.KmeansCluster.RouteIterationCount = 0;
+            Sys.Tool.KmeansCluster.Routes.Clear();
+
+           GenerateMapData();
 
             mapgraph.GraphPane.Chart.Fill.IsVisible = true;
             mapgraph.GraphPane.Legend.IsVisible = false; // must not be turned on
@@ -222,7 +288,10 @@ namespace CustomWindowsForm
             //A 2 dimensional double array is the result you will get here
             //
             //Take the path array and draw a closed line on mapgraph control (zedgraph)
+
+       
             CreateClusteredLines(mapgraph, obj.path, obj.color);
+
         }
 
         private void GenerateMapData()
@@ -272,7 +341,7 @@ namespace CustomWindowsForm
             observations = Matrix.Stack(data);
 
             // Update the scatter plot
-            CreateScatterplot(mapgraph, observations, k,true);
+            CreateScatterplot(mapgraph, observations, ClusterCount,true);
 
             // Forget previous initialization
             kmeans = null;
@@ -312,10 +381,10 @@ namespace CustomWindowsForm
             GaussianClusterCollection clustering = gmm.Learn(observations);
 
             // Classify all instances in mixture data
-            int[] classifications = clustering.Decide(observations);
-
+            //int[] classifications = clustering.Decide(observations);
+            Sys.Tool.KmeansCluster.classifications = clustering.Decide(observations);
             // Draw the classifications
-            updateGraph(classifications);
+            updateGraph(Sys.Tool.KmeansCluster.classifications);
         }
         //*************************************************************
         
@@ -324,30 +393,37 @@ namespace CustomWindowsForm
         ///   parameters as an initial parameter guess.
         /// </summary>
         /// 
-        private void btnInitialize_Click(object sender, EventArgs e)
+        private void StartProcess( string message)
         {
             // Creates and computes a new 
             // K-Means clustering algorithm:
 
+           // GenerateMapData();
+
+            k = this.ClusterCount;
+            Sys.Tool.KmeansCluster.Route.ClusterCount = ClusterCount;
 
             //***********************************************
             //Reset 
             //***********************************************
             //all drawings
-            CreateScatterplot(mapgraph, observations, k, false);
+            CreateScatterplot(mapgraph, observations, ClusterCount, false);
             //Vehicle assignment
             VehiclePlan.ClearAssignment();
             //***********************************************
 
-            kmeans = new KMeans(k);
+            kmeans = new KMeans(ClusterCount);
 
             KMeansClusterCollection clustering = kmeans.Learn(observations);
 
             // Classify all instances in mixture data
-            int[] classifications = clustering.Decide(observations);
+            // int[] classifications = clustering.Decide(observations
+
+            Sys.Tool.KmeansCluster.classifications = clustering.Decide(observations);
+            
 
             // Draw the classifications
-            updateGraph(classifications);
+            updateGraph(Sys.Tool.KmeansCluster.classifications);
 
             //Use GA to find the continuous path for each cluster
             //for each cluster data, GA.LoadMap and Start() processing
@@ -357,9 +433,12 @@ namespace CustomWindowsForm
             mapgraph.GraphPane.GraphObjList.Clear();
 
             foreach (var obj in Sys.Tool.KmeansCluster.ClusteredObjects)
-            {               
-                GA.LoadMap(obj);
-                GA.Start();
+            {
+                
+                    GA.LoadMap(obj);
+                    GA.Start();
+               
+                
             }
            
         }
@@ -419,6 +498,13 @@ namespace CustomWindowsForm
                     ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
+                if (Item.Color == Color.FromArgb(255, 0, 182))
+                {
+                    Item.Color = Color.DeepPink;
+                    //Store city centre for each cluster
+                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]), 0);
+                    Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
+                }
                 //*************************************************************************
 
 
@@ -452,6 +538,13 @@ namespace CustomWindowsForm
                     float x = (float)point[0]; float y = (float)point[1];
                     CityData C = Sys.Tool.KmeansCluster.GetCityData(x, y);
                     ClusterData obj = new ClusterData(Item.Color,x, y, C.Quantity);
+                    Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
+                }
+                if (Item.Color == Color.DeepPink)
+                {
+                    float x = (float)point[0]; float y = (float)point[1];
+                    CityData C = Sys.Tool.KmeansCluster.GetCityData(x, y);
+                    ClusterData obj = new ClusterData(Item.Color, x, y, C.Quantity);
                     Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
                 }
                 //*************************************************************************
@@ -554,52 +647,178 @@ namespace CustomWindowsForm
 
         public void  CreateClusteredLines(ZedGraphControl zgc, double[,] path, Color color)
         {
-            GraphPane myPane = zgc.GraphPane;
 
-            //*****************************************************
-            LineItem curve;
-
-            double[] x = path.GetColumn(0);
-            double[] y = path.GetColumn(1);
-
-            curve = myPane.AddCurve("", x, y, color, SymbolType.Plus);
-            curve.Line.Width = 2.5F;
-            //*****************************************************
+           
 
             double distance = GA.CalculateTotalDistanceInKm(path);
             distance = Math.Round(distance, 2);
             Truck truck = Sys.Tool.KmeansCluster.ProcessVehicleAssignment(color, ref VehiclePlan);
 
-            double xp = x[6];
-            double yp = y[6];
-            int xf = 1; int yf = 1;
-            if (xp < 0) xf = -1 ; xp = xp - 0.25f * xf;  if (xp < -7.0f) xp = -7.0f; if (xp > 4.0f) xp = 4.0f;
-            if (yp < 0) yf = -1; yp = yp + 0.25f * xf;
+            RouteData data = new RouteData();
+            data.ClusterColor = color;
+            data.path = path;
+            data.Truck = truck;
+            data.Distance = distance;
 
-            TextObj text = new TextObj( "Total Distance: " + distance.ToString() + "km, \r\nDriver: "+ truck.DriverName + "\r\n Load: " + truck.LoadCapacity.ToString() + "\r\n Capacity: " + truck.Capacity.ToString() + "\r\n Truck: " + truck.TruckType.ToString(), xp , yp);            
-            // tell Zedgraph to use user scale units for locating the TextObj
-            text.Location.CoordinateFrame = CoordType.AxisXYScale;
-            text.FontSpec.Size = 6;
-            // AlignH the left-center of the text to the specified point
-            text.Location.AlignH = x[4] > 0 ? AlignH.Left : AlignH.Right;
-            text.Location.AlignV = AlignV.Center;
-            text.FontSpec.Border.IsVisible = true;
+            
+
+                Sys.Tool.KmeansCluster.Route.AddRoute(data);
+
+                if (Sys.Tool.KmeansCluster.Route.IsComplete)
+                {
+                //CapacityUsagePercentage
+                Sys.Tool.KmeansCluster.Route.CapacityUsagePercentage = ((float)Sys.Tool.KmeansCluster.Route.TotalLoadCapcity / (float)Sys.Tool.KmeansCluster.Route.TotalTruckCapacity) * 100;
+                Sys.Tool.KmeansCluster.Route.CapacityUsagePercentage = (float)Math.Round(Sys.Tool.KmeansCluster.Route.CapacityUsagePercentage, 2);
+
+
+                Sys.Tool.KmeansCluster.Routes.Add(Sys.Tool.KmeansCluster.Route.TotalDistance,
+                      Sys.Tool.KmeansCluster.Route);
+
+
+
+
+                if (Sys.Tool.KmeansCluster.Route.IsBetterSolution)
+                {
+                    Sys.Tool.Serialization.SerializeObject(Sys.Tool.KmeansCluster.classifications, "classifications.dat");
+                    Sys.Tool.Serialization.SerializeObject(Sys.Tool.KmeansCluster.Route, "route.dat");
+
+                    UpdateReult();
+                }
+                else
+                {
+                    Sys.Tool.KmeansCluster.classifications = (int[])Sys.Tool.Serialization.DeSerializeObject("classifications.dat");
+                    this.updateGraph(Sys.Tool.KmeansCluster.classifications); //reset back to previous one
+                  
+                    Sys.Tool.KmeansCluster.ClusteredObjects = Sys.Tool.KmeansCluster.PreviousClusteredObjects;
+                    //Reset Route container
+                    Sys.Tool.KmeansCluster.Route = new Route();
+                    Sys.Tool.KmeansCluster.Route.ClusterCount = this.ClusterCount;
+                    Sys.Tool.KmeansCluster.Route = (Sys.Tool.Route)Sys.Tool.Serialization.DeSerializeObject("route.dat");
+
+
+                    UpdateReult();
+                }
+
+
+                if (Sys.Tool.KmeansCluster.Route.IsReadyToDraw) Sys.Tool.KmeansCluster.Route.DrawRoutes(zgc);
+
+
+                //Reset Route container
+                Sys.Tool.KmeansCluster.Route = new Route();
+                Sys.Tool.KmeansCluster.Route.ClusterCount = this.ClusterCount;
+
+
+
+                System.Threading.Thread.Sleep(10);
+                System.Windows.Forms.Application.DoEvents();
+
+
+                }
+
+
+            System.Threading.Thread.Sleep(1);
+            System.Windows.Forms.Application.DoEvents();
+
+            //if (Sys.Tool.KmeansCluster.RouteIterationCount == 10)
+            //{                
+               
+            //}
+          
+            
+
+            //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 
           
-            text.FontSpec.Fill.Color = Color.FromArgb(220, 255, 255, 255);
-            text.FontSpec.Border.Color = Color.DarkGray;
-            text.FontSpec.Border.Width = 1;
-           
-            text.FontSpec.Angle = 0;           
-            text.FontSpec.Fill.IsVisible = true;
-            // add the TextObj to the list
-            myPane.GraphObjList.Add(text);
-            //*****************************************************
-          
-
-            zgc.Invalidate();
         }
 
+        public void UpdateResultLabel(string message)
+        {
+            lblResult.Text = message;
+            ProgressBar.Value += 1;
+
+            lblSolution.Visible = true;
+            lblSolution.Text = "Best solution: " + Sys.Tool.KmeansCluster.Route.TotalDistance.ToString() + " km, Load: " + Sys.Tool.KmeansCluster.Route.TotalLoadCapcity.ToString() + ", Total truck capacity: " + Sys.Tool.KmeansCluster.Route.TotalTruckCapacity.ToString() + ", Capacity usage percentage: " + Sys.Tool.KmeansCluster.Route.CapacityUsagePercentage.ToString() + "%";
+
+
+            System.Threading.Thread.Sleep(0);
+            System.Windows.Forms.Application.DoEvents();
+
+ 
+
+            //string Distance;
+            //string Load;
+            //string Cap;
+            //string CapPercent;
+
+            //Distance = Sys.Tool.KmeansCluster.Route.TotalDistance.ToString();
+            //Load = Sys.Tool.KmeansCluster.Route.TotalLoadCapcity.ToString();
+            //Cap = Sys.Tool.KmeansCluster.Route.TotalTruckCapacity.ToString();
+            //CapPercent = Sys.Tool.KmeansCluster.Route.CapacityUsagePercentage.ToString();
+
+
+            // lblSolution.Text = "Best solution: " + Distance + " km, Load: " + Load + ", Total truck capacity: " + Cap +  ", Capacity usage percentage: " + CapPercent + "%";
+        }
+        private void UpdateReult()
+        {
+
+            string Message = "";
+            try
+            {
+                
+
+                if (Sys.Tool.KmeansCluster.RouteIterationCount < Sys.Tool.KmeansCluster.RouteIterationMax &&
+                    Sys.Tool.KmeansCluster.Route.IsBetterSolution == false)
+                {
+                    Message = "Iteration: " + Sys.Tool.KmeansCluster.RouteIterationCount.ToString() + " , processing next iteration...";
+                    if (InvokeRequired)
+                    {
+                        this.Invoke(new Action<string>(UpdateResultLabel), new object[] { Message });
+                        return;
+                    } else
+                    {
+                        lblResult.Text = Message;
+                    }
+                }
+
+                if (Sys.Tool.KmeansCluster.RouteIterationCount < Sys.Tool.KmeansCluster.RouteIterationMax &&  
+                    Sys.Tool.KmeansCluster.Route.IsBetterSolution)
+                {
+                    Message = "Iteration: " + Sys.Tool.KmeansCluster.RouteIterationCount.ToString() + " , current solution is better, processing next iteration...";
+                    if (InvokeRequired)
+                    {
+                        this.Invoke(new Action<string>(UpdateResultLabel), new object[] { Message });
+                        return;
+                    }
+                    else
+                    {
+                        lblResult.Text = Message;
+                    }
+                    
+                }
+
+                if (Sys.Tool.KmeansCluster.RouteIterationCount == Sys.Tool.KmeansCluster.RouteIterationMax)
+                {
+                    Message = "Iteration: " + Sys.Tool.KmeansCluster.RouteIterationCount.ToString() + ". Process is complete. The result below is the best solution.";
+                    if (InvokeRequired)
+                    {
+                        this.Invoke(new Action<string>(UpdateResultLabel), new object[] { Message });
+                        return;
+                    }
+                    else
+                    {
+                        lblResult.Text = Message;
+                    }
+                }
+   
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
         private void TopBorderPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -852,11 +1071,7 @@ namespace CustomWindowsForm
             }
         }
 
-        private void CloseButton_MouseClick(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+       
 
 
 
@@ -1009,72 +1224,72 @@ namespace CustomWindowsForm
 
         private void file_button_Click(object sender, EventArgs e)
         {
-            file_button.BZBackColor = Color.Black;
-            file_button.ChangeColorMouseHC = false;
-            edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            view_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            run_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            help_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            edit_button.ChangeColorMouseHC = true;
-            view_button.ChangeColorMouseHC = true;
-            run_button.ChangeColorMouseHC = true;
-            help_button.ChangeColorMouseHC = true;
+            btnEntry.BZBackColor = Color.Black;
+            btnEntry.ChangeColorMouseHC = false;
+           // edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnView.BZBackColor = Color.FromArgb(60, 60, 60);
+           // run_button.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnHelp.BZBackColor = Color.FromArgb(60, 60, 60);
+          //  edit_button.ChangeColorMouseHC = true;
+            btnView.ChangeColorMouseHC = true;
+          //  run_button.ChangeColorMouseHC = true;
+            btnHelp.ChangeColorMouseHC = true;
         }
 
         private void edit_button_Click(object sender, EventArgs e)
         {
-            edit_button.BZBackColor = Color.Black;
-            edit_button.ChangeColorMouseHC = false;
-            file_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            view_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            run_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            help_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            file_button.ChangeColorMouseHC = true;
-            view_button.ChangeColorMouseHC = true;
-            run_button.ChangeColorMouseHC = true;
-            help_button.ChangeColorMouseHC = true;
+          //  edit_button.BZBackColor = Color.Black;
+          //  edit_button.ChangeColorMouseHC = false;
+            btnEntry.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnView.BZBackColor = Color.FromArgb(60, 60, 60);
+          //  run_button.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnHelp.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnEntry.ChangeColorMouseHC = true;
+            btnView.ChangeColorMouseHC = true;
+          //  run_button.ChangeColorMouseHC = true;
+            btnHelp.ChangeColorMouseHC = true;
         }
 
         private void view_button_Click(object sender, EventArgs e)
         {
-            view_button.BZBackColor = Color.Black;
-            view_button.ChangeColorMouseHC = false;
-            file_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            run_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            help_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            file_button.ChangeColorMouseHC = true;
-            edit_button.ChangeColorMouseHC = true;
-            run_button.ChangeColorMouseHC = true;
-            help_button.ChangeColorMouseHC = true;
+            btnView.BZBackColor = Color.Black;
+            btnView.ChangeColorMouseHC = false;
+            btnEntry.BZBackColor = Color.FromArgb(60, 60, 60);
+          //  edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
+          //  run_button.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnHelp.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnEntry.ChangeColorMouseHC = true;
+          //  edit_button.ChangeColorMouseHC = true;
+         //   run_button.ChangeColorMouseHC = true;
+            btnHelp.ChangeColorMouseHC = true;
         }
 
         private void run_button_Click(object sender, EventArgs e)
         {
-            run_button.BZBackColor = Color.Black;
-            run_button.ChangeColorMouseHC = false;
-            file_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            view_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            help_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            file_button.ChangeColorMouseHC = true;
-            edit_button.ChangeColorMouseHC = true;
-            view_button.ChangeColorMouseHC = true;
-            help_button.ChangeColorMouseHC = true;
+           // run_button.BZBackColor = Color.Black;
+          //  run_button.ChangeColorMouseHC = false;
+            btnEntry.BZBackColor = Color.FromArgb(60, 60, 60);
+          //  edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnView.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnHelp.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnEntry.ChangeColorMouseHC = true;
+           // edit_button.ChangeColorMouseHC = true;
+            btnView.ChangeColorMouseHC = true;
+            btnHelp.ChangeColorMouseHC = true;
         }
 
         private void help_button_Click(object sender, EventArgs e)
         {
-            help_button.BZBackColor = Color.Black;
-            help_button.ChangeColorMouseHC = false;
-            file_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            view_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            run_button.BZBackColor = Color.FromArgb(60, 60, 60);
-            file_button.ChangeColorMouseHC = true;
-            edit_button.ChangeColorMouseHC = true;
-            view_button.ChangeColorMouseHC = true;
-            run_button.ChangeColorMouseHC = true;
+            btnHelp.BZBackColor = Color.Black;
+            btnHelp.ChangeColorMouseHC = false;
+            btnEntry.BZBackColor = Color.FromArgb(60, 60, 60);
+           // edit_button.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnView.BZBackColor = Color.FromArgb(60, 60, 60);
+           // run_button.BZBackColor = Color.FromArgb(60, 60, 60);
+            btnEntry.ChangeColorMouseHC = true;
+           // edit_button.ChangeColorMouseHC = true;
+            btnView.ChangeColorMouseHC = true;
+          //  run_button.ChangeColorMouseHC = true;
         }
 
 
@@ -1097,14 +1312,99 @@ namespace CustomWindowsForm
             TopPanel_MouseUp(sender, e);
         }
 
+
         private void BtnKMeans_Click(object sender, EventArgs e)
         {
-            btnInitialize_Click(sender,e);
+
+           
+
+
+            if (IsProcessStarted == false)
+            {
+                IsProcessStarted = true;
+
+             
+                //System.Threading.Thread.Sleep(0);
+                System.Windows.Forms.Application.DoEvents();
+                panelBlock.Visible = true;
+                panelRight.Enabled = false;
+                
+                if (lblResult.Text.Trim() !="") Init();
+
+
+                var worker = new BackgroundWorker();
+                worker.DoWork += new DoWorkEventHandler(Start_Job);
+                worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
+
+                worker.RunWorkerAsync();
+            }
+            
         }
 
+       
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            IsProcessStarted = false;
+            panelRight.Enabled = true;
+            panelBlock.Visible = false;
+
+   
+
+        }
+
+        void Start_Job(object sender, DoWorkEventArgs e)
+        {
+           
+
+            int n = Sys.Tool.KmeansCluster.RouteIterationMax;
+            for (int i = 0; i < n; i++)
+            {
+                //this.BeginInvoke(new Action<string>(StartProcess), new object[] { message };
+                StartProcess("");
+                System.Threading.Thread.Sleep(200);
+                System.Windows.Forms.Application.DoEvents();
+
+            }
+            
+
+        }
+        private void BtnClose_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Close();
+        }
         private void BtnGMM_Click(object sender, EventArgs e)
         {
             btnCompute_Click(sender, e);
+        }
+
+        private void btnEntry_Click(object sender, EventArgs e)
+        {
+            FormEntry Entry = new FormEntry();
+            this.AddOwnedForm(Entry);
+            Entry.ShowDialog(this);
+
+            if (Sys.Tool.KmeansCluster.IsMapDataEdited)
+            {
+                //reset map
+                Init();
+            }
+           
+
+        }
+
+        private void btnView_Click(object sender, EventArgs e)
+        {
+            SummaryForm Summary = new SummaryForm();
+            this.AddOwnedForm(Summary);
+            Summary.ShowDialog(this);
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            HelpForm Help = new HelpForm();
+            this.AddOwnedForm(Help);
+            Help.ShowDialog(this);
         }
 
       

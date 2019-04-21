@@ -15,7 +15,7 @@
 
 Project introduction here
 
-![DoReMi Vehicle Routing Problem](doc/DoReMiVRP.png)
+![DoReMi Vehicle Routing Problem](SystemCode/doc/DoReMiVRP.jpg)
 
 ## Development Tools & Environment
 ### Tools

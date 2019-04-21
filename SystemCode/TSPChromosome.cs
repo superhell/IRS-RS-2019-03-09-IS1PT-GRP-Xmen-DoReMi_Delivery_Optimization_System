@@ -156,46 +156,34 @@ namespace Sys.Tool
         public override void Mutate()
         {
 
-
-            do
+            // Mutation rate
+            int MutateRate = 0;
+            int Rate1 = Generator.Random.Next(0, 100);
+            if (Rate1 < MutateRate)
             {
-                // Mutation rate
-                int MutateRate = 3;
-                int Rate1 = Generator.Random.Next(0, 100);
-                if (Rate1 < MutateRate)
-                {
-                    ushort[] child = new ushort[length];
-                    // create child
-                    CreateChildUsingMutate(this.val, child);
+                ushort[] child = new ushort[length];
+                // create child
+                CreateChildUsingMutate(this.val, child);
 
-                    // replace parents with children
-                    this.val = child;
-                }
-
-                // Natural disaster rate
-                int DisasterRate = 2;
-                int Rate2 = Generator.Random.Next(0, 10000);
-                if (Rate2 < DisasterRate)
-                {
-                    ushort[] NewSpecies = new ushort[length];
-                    // create NewSpecies
-                    OccasionalDisaster(this.val, NewSpecies);
-
-                    // replace parents with NewSpecies
-                    this.val = NewSpecies;
-                }
+                // replace parents with children
+                this.val = child;
             }
-            while (Vaccination(this.val) == 0);
+
+            // Natural disaster rate
+            int DisasterRate = 0;
+            int Rate2 = Generator.Random.Next(0, 10000);
+            if (Rate2 < DisasterRate)
+            {
+                ushort[] NewSpecies = new ushort[length];
+                // create NewSpecies
+                OccasionalDisaster(this.val, NewSpecies);
+
+                // replace parents with NewSpecies
+                this.val = NewSpecies;
+            }
+
             // Vaccination
-
-            
-
-            /*string file_name = "C:\\Users\\binbin\\Downloads\\ttt.txt";
-            System.IO.StreamWriter objWriter;
-            objWriter = new System.IO.StreamWriter(file_name);
-            objWriter.Write(Di);
-            */
-
+            ushort[] vaccination = new ushort[length];
 
         }
         // Produce new child applying mutation to one parent
@@ -227,6 +215,7 @@ namespace Sys.Tool
                 { k = Generator.Random.Next(0, length); }
                 NewSpecies[i] = (ushort)(k);
                 geneIsBusy[k] = true;
+                Console.WriteLine(k);
             }
         }
 
@@ -235,19 +224,19 @@ namespace Sys.Tool
         {
             int tot = 0;
 
-            for (int i = 1; i < length; i++)
+            for (int i = 0; i < length; i++)
             {
                 double dx1 = map[i, 0] - map[0, 0];
                 double dy1 = map[i, 1] - map[0, 1];
 
                 tot = tot + (int)Math.Sqrt(dx1 * dx1 + dy1 * dy1);
-            
+
             }
 
-            ushort Mean = (ushort)(tot / (length-1));
+            ushort Mean = (ushort)(tot / length);
 
-            double dx = map[child[1], 0] - map[0, 0];
-            double dy = map[child[1], 1] - map[0, 1];
+            double dx = map[1, 0] - map[0, 0];
+            double dy = map[1, 1] - map[0, 1];
 
             ushort Eval = (ushort)Math.Sqrt(dx * dx + dy * dy);
 

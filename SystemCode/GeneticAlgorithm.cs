@@ -15,18 +15,23 @@ namespace Sys.Tool
     public class GeneticAlgorithm
     {
         public event Action<EventArgsIterationLoop> OnIterationLoop;
+         
 
         private int _selectionMethod = 0;
         private int _citiesCount = 0;
 
         public int citiesCount { get { return _citiesCount; } }
         public int populationSize = 100;
-        public int iterations = 50;
+        public int iterations = 100;
         public EnumSelectionMethod selectionMethod = EnumSelectionMethod.Elite ;
         public bool greedyCrossover = true;
 
         public double[,] map = null;
         private System.Drawing.Color ClusterColor;
+
+        public double[,] path;
+      
+
 
         public enum EnumSelectionMethod
         {
@@ -53,7 +58,7 @@ namespace Sys.Tool
 
 
         public void Start(  EnumSelectionMethod selectionmethod = EnumSelectionMethod.Elite,
-                            int populationsize=100, int Iterations=50, bool IsgreedyCrossover = true )
+                            int populationsize= 100, int Iterations= 100, bool IsgreedyCrossover = true )
         {
             // get population size
             this.populationSize = populationsize;
@@ -65,15 +70,15 @@ namespace Sys.Tool
 
             if (populationSize > 100) populationSize = 100; // limit to Max 100
             if (populationSize < 50) populationSize = 50; // limit to Min 10
-            populationSize = Math.Max(10, Math.Min(100, populationSize));
+            populationSize = Math.Max(10, Math.Min(200, populationSize));
                        
             // iterations
-            if (iterations > 100) iterations = 100; // limit to Max 200
+            if (iterations > 150) iterations = 150; // limit to Max 200
             if (iterations < 50) iterations = 50; // limit to Min 10
             iterations = Math.Max(50, iterations);
 
             SearchSolution(ClusterColor);
-
+            System.Threading.Thread.SpinWait(100);
 
         }
 
@@ -104,7 +109,7 @@ namespace Sys.Tool
             {
                 throw e;
             }
-           
+         
         }
 
         private void SearchSolution(System.Drawing.Color clusterColor)
@@ -125,8 +130,8 @@ namespace Sys.Tool
             int i = 1;
 
             // path
-            double[,] path = new double[citiesCount + 1, 2];
-
+             path = new double[citiesCount + 1, 2];
+             
             // loop
             while (true)
             {
@@ -159,8 +164,9 @@ namespace Sys.Tool
             obj.greedyCrossover = greedyCrossover;
             obj.path = path;
             obj.color = clusterColor;
-            IAsyncResult result = OnIterationLoop.BeginInvoke(obj, null, null);
-
+            //IAsyncResult result = OnIterationLoop.BeginInvoke(obj, null, null); // do not use async thread
+            //                                                                    //OnIterationLoop.Invoke(obj );
+            OnIterationLoop.Invoke(obj);
         }
 
 

@@ -54,6 +54,9 @@
     <Reference Include="Accord.Statistics">
       <HintPath>Lib\Accord.Statistics.dll</HintPath>
     </Reference>
+    <Reference Include="CsvHelper">
+      <HintPath>Lib\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -69,8 +72,22 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CityItem.cs" />
+    <Compile Include="Common.cs" />
+    <Compile Include="FormEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEntry.Designer.cs">
+      <DependentUpon>FormEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="GeneticAlgorithm.cs" />
     <Compile Include="HashTable.cs" />
+    <Compile Include="HelpForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HelpForm.Designer.cs">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="KMeansCluster.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -100,8 +117,21 @@
     <Compile Include="ShapedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SummaryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SummaryForm.Designer.cs">
+      <DependentUpon>SummaryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="test.cs" />
     <Compile Include="TSPChromosome.cs" />
     <Compile Include="TSPFitnessFunction.cs" />
+    <EmbeddedResource Include="FormEntry.resx">
+      <DependentUpon>FormEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HelpForm.resx">
+      <DependentUpon>HelpForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +139,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SummaryForm.resx">
+      <DependentUpon>SummaryForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

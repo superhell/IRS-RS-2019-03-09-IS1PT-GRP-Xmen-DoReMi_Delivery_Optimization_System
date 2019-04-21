@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
 
-namespace CustomWindowsForm
+namespace DoReMiVRP
 {
     public class ShapedButton : System.Windows.Forms.Button
     {

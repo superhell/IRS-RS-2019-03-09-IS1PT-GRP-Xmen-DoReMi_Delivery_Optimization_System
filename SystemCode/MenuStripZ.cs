@@ -5,7 +5,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-namespace CustomWindowsForm
+namespace DoReMiVRP
 {
     public class MenuStripZ : MenuStrip
     {

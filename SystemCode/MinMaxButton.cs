@@ -1,10 +1,11 @@
-﻿using System;
+﻿ 
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
-namespace CustomWindowsForm
+namespace DoReMiVRP
 {
     public class MinMaxButton : System.Windows.Forms.Button
     {

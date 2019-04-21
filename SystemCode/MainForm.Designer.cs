@@ -1,4 +1,4 @@
-﻿namespace CustomWindowsForm
+﻿namespace DoReMiVRP
 {
     partial class MainForm
     {
@@ -34,10 +34,18 @@
             this.panelgraph = new System.Windows.Forms.Panel();
             this.mapgraph = new ZedGraph.ZedGraphControl();
             this.panel9 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.lblSolution = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.ProgressBar = new System.Windows.Forms.ProgressBar();
+            this.lblResult = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.maproutegraph = new ZedGraph.ZedGraphControl();
             this.panelSide = new System.Windows.Forms.Panel();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboClusterSize = new System.Windows.Forms.ComboBox();
             this.chkBWMap = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -48,14 +56,24 @@
             this.txtPoint1 = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panelRight = new System.Windows.Forms.Panel();
+            this.btnHelp = new DoReMiVRP.ButtonX();
+            this.btnView = new DoReMiVRP.ButtonX();
+            this.btnEntry = new DoReMiVRP.ButtonX();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.panelspace1 = new System.Windows.Forms.Panel();
+            this.panelspace = new System.Windows.Forms.Panel();
+            this.panelBlock = new System.Windows.Forms.Panel();
+            this.btnReset = new DoReMiVRP.ShapedButton();
+            this.BtnKMeans = new DoReMiVRP.ShapedButton();
             this.panel10 = new System.Windows.Forms.Panel();
+            this.btnClose = new DoReMiVRP.ShapedButton();
             this.TopPanel = new System.Windows.Forms.Panel();
             this.lbVersion = new System.Windows.Forms.Label();
             this.WindowTextLabel = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.MinButton = new DoReMiVRP.ButtonZ();
+            this.MaxButton = new DoReMiVRP.MinMaxButton();
+            this.CloseButton = new DoReMiVRP.ButtonZ();
             this.panel7 = new System.Windows.Forms.Panel();
             this.LeftTopPanel = new System.Windows.Forms.Panel();
             this.RightTopPanel = new System.Windows.Forms.Panel();
@@ -66,28 +84,19 @@
             this.TopBorderPanel = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.RightBottomPanel = new System.Windows.Forms.Panel();
-            this.help_button = new CustomWindowsForm.ButtonX();
-            this.run_button = new CustomWindowsForm.ButtonX();
-            this.view_button = new CustomWindowsForm.ButtonX();
-            this.edit_button = new CustomWindowsForm.ButtonX();
-            this.file_button = new CustomWindowsForm.ButtonX();
-            this.HelpBtn = new CustomWindowsForm.ShapedButton();
-            this.BtnGMM = new CustomWindowsForm.ShapedButton();
-            this.btnReset = new CustomWindowsForm.ShapedButton();
-            this.shapedButton1 = new CustomWindowsForm.ShapedButton();
-            this.BtnKMeans = new CustomWindowsForm.ShapedButton();
-            this.CloseBtn = new CustomWindowsForm.ShapedButton();
-            this.MinButton = new CustomWindowsForm.ButtonZ();
-            this.MaxButton = new CustomWindowsForm.MinMaxButton();
-            this.CloseButton = new CustomWindowsForm.ButtonZ();
+            this.buttonZ2 = new DoReMiVRP.ButtonZ();
             this.panel1.SuspendLayout();
             this.panelgraph.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel12.SuspendLayout();
             this.panel8.SuspendLayout();
             this.panelSide.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panelRight.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panelspace1.SuspendLayout();
+            this.panelspace.SuspendLayout();
             this.TopPanel.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -132,7 +141,7 @@
             // mapgraph
             // 
             this.mapgraph.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapgraph.Location = new System.Drawing.Point(0, 35);
+            this.mapgraph.Location = new System.Drawing.Point(0, 67);
             this.mapgraph.Name = "mapgraph";
             this.mapgraph.ScrollGrace = 0D;
             this.mapgraph.ScrollMaxX = 0D;
@@ -141,22 +150,85 @@
             this.mapgraph.ScrollMinX = 0D;
             this.mapgraph.ScrollMinY = 0D;
             this.mapgraph.ScrollMinY2 = 0D;
-            this.mapgraph.Size = new System.Drawing.Size(1076, 690);
+            this.mapgraph.Size = new System.Drawing.Size(1076, 658);
             this.mapgraph.TabIndex = 23;
             this.mapgraph.UseExtendedPrintDialog = true;
             // 
             // panel9
             // 
-            this.panel9.BackColor = System.Drawing.Color.DarkGray;
+            this.panel9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(212)))), ((int)(((byte)(236)))));
+            this.panel9.Controls.Add(this.panel13);
+            this.panel9.Controls.Add(this.panel12);
+            this.panel9.Controls.Add(this.lblResult);
             this.panel9.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel9.Location = new System.Drawing.Point(0, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1076, 35);
+            this.panel9.Size = new System.Drawing.Size(1076, 67);
             this.panel9.TabIndex = 22;
+            // 
+            // panel13
+            // 
+            this.panel13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(212)))), ((int)(((byte)(236)))));
+            this.panel13.Controls.Add(this.lblSolution);
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel13.Location = new System.Drawing.Point(0, 32);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(1076, 30);
+            this.panel13.TabIndex = 38;
+            // 
+            // lblSolution
+            // 
+            this.lblSolution.AutoSize = true;
+            this.lblSolution.BackColor = System.Drawing.Color.Transparent;
+            this.lblSolution.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSolution.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(20)))));
+            this.lblSolution.Location = new System.Drawing.Point(14, 6);
+            this.lblSolution.Name = "lblSolution";
+            this.lblSolution.Size = new System.Drawing.Size(68, 18);
+            this.lblSolution.TabIndex = 31;
+            this.lblSolution.Text = "Solution:";
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.ProgressBar);
+            this.panel12.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel12.Location = new System.Drawing.Point(0, 62);
+            this.panel12.Margin = new System.Windows.Forms.Padding(1);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(1076, 5);
+            this.panel12.TabIndex = 36;
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.BackColor = System.Drawing.Color.DarkGray;
+            this.ProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ProgressBar.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.ProgressBar.Location = new System.Drawing.Point(0, 1);
+            this.ProgressBar.Margin = new System.Windows.Forms.Padding(0);
+            this.ProgressBar.MarqueeAnimationSpeed = 0;
+            this.ProgressBar.Maximum = 10;
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(1076, 4);
+            this.ProgressBar.Step = 1;
+            this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.ProgressBar.TabIndex = 32;
+            this.toolTip1.SetToolTip(this.ProgressBar, "Iteration progress...");
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.BackColor = System.Drawing.Color.Transparent;
+            this.lblResult.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.ForeColor = System.Drawing.Color.DarkBlue;
+            this.lblResult.Location = new System.Drawing.Point(14, 7);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(59, 18);
+            this.lblResult.TabIndex = 30;
+            this.lblResult.Text = "Result: ";
             // 
             // panel8
             // 
-            this.panel8.BackColor = System.Drawing.Color.DarkGray;
+            this.panel8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(212)))), ((int)(((byte)(236)))));
             this.panel8.Controls.Add(this.label3);
             this.panel8.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel8.Location = new System.Drawing.Point(0, 725);
@@ -193,6 +265,7 @@
             // panelSide
             // 
             this.panelSide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelSide.Controls.Add(this.panel11);
             this.panelSide.Controls.Add(this.chkBWMap);
             this.panelSide.Controls.Add(this.panel6);
             this.panelSide.Controls.Add(this.txtPoint2);
@@ -201,9 +274,49 @@
             this.panelSide.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSide.Location = new System.Drawing.Point(0, 64);
             this.panelSide.Name = "panelSide";
-            this.panelSide.Padding = new System.Windows.Forms.Padding(4);
+            this.panelSide.Padding = new System.Windows.Forms.Padding(6);
             this.panelSide.Size = new System.Drawing.Size(160, 762);
             this.panelSide.TabIndex = 42;
+            // 
+            // panel11
+            // 
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel11.Controls.Add(this.label4);
+            this.panel11.Controls.Add(this.cboClusterSize);
+            this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel11.Location = new System.Drawing.Point(6, 555);
+            this.panel11.Name = "panel11";
+            this.panel11.Padding = new System.Windows.Forms.Padding(4, 4, 4, 16);
+            this.panel11.Size = new System.Drawing.Size(148, 67);
+            this.panel11.TabIndex = 32;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Silver;
+            this.label4.Location = new System.Drawing.Point(4, 4);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(136, 16);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "No. of Route Clusters:";
+            // 
+            // cboClusterSize
+            // 
+            this.cboClusterSize.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cboClusterSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboClusterSize.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboClusterSize.FormattingEnabled = true;
+            this.cboClusterSize.Items.AddRange(new object[] {
+            "2",
+            "3",
+            "4",
+            "5"});
+            this.cboClusterSize.Location = new System.Drawing.Point(4, 24);
+            this.cboClusterSize.Name = "cboClusterSize";
+            this.cboClusterSize.Size = new System.Drawing.Size(138, 25);
+            this.cboClusterSize.TabIndex = 31;
             // 
             // chkBWMap
             // 
@@ -211,9 +324,9 @@
             this.chkBWMap.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.chkBWMap.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkBWMap.ForeColor = System.Drawing.Color.Silver;
-            this.chkBWMap.Location = new System.Drawing.Point(4, 624);
+            this.chkBWMap.Location = new System.Drawing.Point(6, 622);
             this.chkBWMap.Name = "chkBWMap";
-            this.chkBWMap.Size = new System.Drawing.Size(152, 20);
+            this.chkBWMap.Size = new System.Drawing.Size(148, 20);
             this.chkBWMap.TabIndex = 22;
             this.chkBWMap.Text = "Black &&  White Map";
             this.chkBWMap.UseVisualStyleBackColor = true;
@@ -226,9 +339,9 @@
             this.panel6.Controls.Add(this.txtXY);
             this.panel6.Controls.Add(this.txtFinal);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(4, 644);
+            this.panel6.Location = new System.Drawing.Point(6, 642);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(152, 114);
+            this.panel6.Size = new System.Drawing.Size(148, 114);
             this.panel6.TabIndex = 25;
             // 
             // label2
@@ -296,58 +409,215 @@
             this.panel4.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel4.BackgroundImage")));
             this.panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(4, 4);
+            this.panel4.Location = new System.Drawing.Point(6, 6);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(152, 109);
+            this.panel4.Size = new System.Drawing.Size(148, 109);
             this.panel4.TabIndex = 20;
             // 
             // panelRight
             // 
             this.panelRight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.panelRight.Controls.Add(this.help_button);
-            this.panelRight.Controls.Add(this.run_button);
-            this.panelRight.Controls.Add(this.view_button);
-            this.panelRight.Controls.Add(this.edit_button);
-            this.panelRight.Controls.Add(this.file_button);
+            this.panelRight.Controls.Add(this.btnHelp);
+            this.panelRight.Controls.Add(this.btnView);
+            this.panelRight.Controls.Add(this.btnEntry);
             this.panelRight.Dock = System.Windows.Forms.DockStyle.Right;
             this.panelRight.Location = new System.Drawing.Point(1238, 64);
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(160, 762);
             this.panelRight.TabIndex = 43;
             // 
+            // btnHelp
+            // 
+            this.btnHelp.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnHelp.ChangeColorMouseHC = true;
+            this.btnHelp.DisplayText = "Help";
+            this.btnHelp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHelp.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHelp.ForeColor = System.Drawing.Color.White;
+            this.btnHelp.Location = new System.Drawing.Point(0, 70);
+            this.btnHelp.MouseClickColor1 = System.Drawing.Color.Black;
+            this.btnHelp.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnHelp.Name = "btnHelp";
+            this.btnHelp.Size = new System.Drawing.Size(160, 35);
+            this.btnHelp.TabIndex = 31;
+            this.btnHelp.Text = "Help";
+            this.btnHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnHelp.TextLocation_X = 24;
+            this.btnHelp.TextLocation_Y = 6;
+            this.btnHelp.UseVisualStyleBackColor = true;
+            // 
+            // btnView
+            // 
+            this.btnView.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnView.ChangeColorMouseHC = true;
+            this.btnView.DisplayText = "Summary";
+            this.btnView.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnView.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnView.ForeColor = System.Drawing.Color.White;
+            this.btnView.Location = new System.Drawing.Point(0, 35);
+            this.btnView.MouseClickColor1 = System.Drawing.Color.Black;
+            this.btnView.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnView.Name = "btnView";
+            this.btnView.Size = new System.Drawing.Size(160, 35);
+            this.btnView.TabIndex = 29;
+            this.btnView.Text = "Summary";
+            this.btnView.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnView.TextLocation_X = 24;
+            this.btnView.TextLocation_Y = 6;
+            this.btnView.UseVisualStyleBackColor = true;
+            // 
+            // btnEntry
+            // 
+            this.btnEntry.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.btnEntry.ChangeColorMouseHC = true;
+            this.btnEntry.DisplayText = "Order Entry";
+            this.btnEntry.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnEntry.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEntry.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntry.ForeColor = System.Drawing.Color.White;
+            this.btnEntry.Location = new System.Drawing.Point(0, 0);
+            this.btnEntry.MouseClickColor1 = System.Drawing.Color.Black;
+            this.btnEntry.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnEntry.Name = "btnEntry";
+            this.btnEntry.Size = new System.Drawing.Size(160, 35);
+            this.btnEntry.TabIndex = 27;
+            this.btnEntry.Text = "Order Entry";
+            this.btnEntry.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnEntry.TextLocation_X = 24;
+            this.btnEntry.TextLocation_Y = 6;
+            this.btnEntry.UseVisualStyleBackColor = true;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.panel3.Controls.Add(this.panelspace1);
+            this.panel3.Controls.Add(this.panelspace);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel3.Location = new System.Drawing.Point(0, 826);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1398, 72);
             this.panel3.TabIndex = 41;
             // 
-            // panelspace1
+            // panelspace
             // 
-            this.panelspace1.Controls.Add(this.HelpBtn);
-            this.panelspace1.Controls.Add(this.panel10);
-            this.panelspace1.Controls.Add(this.BtnGMM);
-            this.panelspace1.Controls.Add(this.btnReset);
-            this.panelspace1.Controls.Add(this.shapedButton1);
-            this.panelspace1.Controls.Add(this.BtnKMeans);
-            this.panelspace1.Controls.Add(this.CloseBtn);
-            this.panelspace1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelspace1.Location = new System.Drawing.Point(0, 0);
-            this.panelspace1.Name = "panelspace1";
-            this.panelspace1.Padding = new System.Windows.Forms.Padding(3, 8, 3, 8);
-            this.panelspace1.Size = new System.Drawing.Size(1398, 72);
-            this.panelspace1.TabIndex = 12;
+            this.panelspace.Controls.Add(this.panelBlock);
+            this.panelspace.Controls.Add(this.btnReset);
+            this.panelspace.Controls.Add(this.BtnKMeans);
+            this.panelspace.Controls.Add(this.panel10);
+            this.panelspace.Controls.Add(this.btnClose);
+            this.panelspace.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelspace.Location = new System.Drawing.Point(0, 0);
+            this.panelspace.Name = "panelspace";
+            this.panelspace.Padding = new System.Windows.Forms.Padding(3, 8, 3, 8);
+            this.panelspace.Size = new System.Drawing.Size(1398, 72);
+            this.panelspace.TabIndex = 12;
+            // 
+            // panelBlock
+            // 
+            this.panelBlock.Location = new System.Drawing.Point(965, 7);
+            this.panelBlock.Name = "panelBlock";
+            this.panelBlock.Size = new System.Drawing.Size(298, 58);
+            this.panelBlock.TabIndex = 35;
+            this.panelBlock.Visible = false;
+            // 
+            // btnReset
+            // 
+            this.btnReset.BackColor = System.Drawing.Color.Transparent;
+            this.btnReset.ButtonShape = DoReMiVRP.ShapedButton.ButtonsShapes.RoundRect;
+            this.btnReset.ButtonText = "Reset";
+            this.btnReset.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnReset.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnReset.FlatAppearance.BorderSize = 0;
+            this.btnReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnReset.ForeColor = System.Drawing.Color.White;
+            this.btnReset.GradientAngle = 90;
+            this.btnReset.Location = new System.Drawing.Point(994, 8);
+            this.btnReset.MouseClickColor1 = System.Drawing.Color.Black;
+            this.btnReset.MouseClickColor2 = System.Drawing.Color.Black;
+            this.btnReset.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnReset.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnReset.Name = "btnReset";
+            this.btnReset.ShowButtontext = true;
+            this.btnReset.Size = new System.Drawing.Size(110, 56);
+            this.btnReset.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnReset.TabIndex = 41;
+            this.btnReset.TextLocation_X = 35;
+            this.btnReset.TextLocation_Y = 18;
+            this.btnReset.Transparent1 = 250;
+            this.btnReset.Transparent2 = 250;
+            this.btnReset.UseVisualStyleBackColor = false;
+            // 
+            // BtnKMeans
+            // 
+            this.BtnKMeans.BackColor = System.Drawing.Color.Transparent;
+            this.BtnKMeans.ButtonShape = DoReMiVRP.ShapedButton.ButtonsShapes.RoundRect;
+            this.BtnKMeans.ButtonText = "Run Process";
+            this.BtnKMeans.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnKMeans.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(40)))));
+            this.BtnKMeans.FlatAppearance.BorderSize = 0;
+            this.BtnKMeans.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.BtnKMeans.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.BtnKMeans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BtnKMeans.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnKMeans.ForeColor = System.Drawing.Color.White;
+            this.BtnKMeans.GradientAngle = 90;
+            this.BtnKMeans.Location = new System.Drawing.Point(1104, 8);
+            this.BtnKMeans.MouseClickColor1 = System.Drawing.Color.Black;
+            this.BtnKMeans.MouseClickColor2 = System.Drawing.Color.Black;
+            this.BtnKMeans.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(30)))));
+            this.BtnKMeans.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(80)))));
+            this.BtnKMeans.Name = "BtnKMeans";
+            this.BtnKMeans.ShowButtontext = true;
+            this.BtnKMeans.Size = new System.Drawing.Size(152, 56);
+            this.BtnKMeans.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(70)))), ((int)(((byte)(190)))));
+            this.BtnKMeans.TabIndex = 40;
+            this.BtnKMeans.TextLocation_X = 30;
+            this.BtnKMeans.TextLocation_Y = 18;
+            this.BtnKMeans.Transparent1 = 250;
+            this.BtnKMeans.Transparent2 = 250;
+            this.BtnKMeans.UseVisualStyleBackColor = false;
             // 
             // panel10
             // 
             this.panel10.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel10.Location = new System.Drawing.Point(735, 8);
+            this.panel10.Location = new System.Drawing.Point(1256, 8);
             this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(32, 56);
-            this.panel10.TabIndex = 20;
+            this.panel10.Size = new System.Drawing.Size(29, 56);
+            this.panel10.TabIndex = 39;
+            // 
+            // btnClose
+            // 
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
+            this.btnClose.ButtonShape = DoReMiVRP.ShapedButton.ButtonsShapes.RoundRect;
+            this.btnClose.ButtonText = "Close";
+            this.btnClose.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnClose.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnClose.FlatAppearance.BorderSize = 0;
+            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClose.ForeColor = System.Drawing.Color.White;
+            this.btnClose.GradientAngle = 90;
+            this.btnClose.Location = new System.Drawing.Point(1285, 8);
+            this.btnClose.MouseClickColor1 = System.Drawing.Color.Black;
+            this.btnClose.MouseClickColor2 = System.Drawing.Color.Black;
+            this.btnClose.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnClose.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.btnClose.Name = "btnClose";
+            this.btnClose.ShowButtontext = true;
+            this.btnClose.Size = new System.Drawing.Size(110, 56);
+            this.btnClose.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.btnClose.TabIndex = 36;
+            this.btnClose.TextLocation_X = 35;
+            this.btnClose.TextLocation_Y = 18;
+            this.btnClose.Transparent1 = 250;
+            this.btnClose.Transparent2 = 250;
+            this.btnClose.UseVisualStyleBackColor = false;
             // 
             // TopPanel
             // 
@@ -370,7 +640,7 @@
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(73, 16);
             this.lbVersion.TabIndex = 21;
-            this.lbVersion.Text = "Version 1.2";
+            this.lbVersion.Text = "Version 3.3";
             // 
             // WindowTextLabel
             // 
@@ -401,6 +671,64 @@
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(148, 36);
             this.panel5.TabIndex = 8;
+            // 
+            // MinButton
+            // 
+            this.MinButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.MinButton.DisplayText = "_";
+            this.MinButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MinButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MinButton.ForeColor = System.Drawing.Color.White;
+            this.MinButton.Location = new System.Drawing.Point(55, 0);
+            this.MinButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
+            this.MinButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.MinButton.Name = "MinButton";
+            this.MinButton.Size = new System.Drawing.Size(31, 36);
+            this.MinButton.TabIndex = 10;
+            this.MinButton.Text = "_";
+            this.MinButton.TextLocation_X = 6;
+            this.MinButton.TextLocation_Y = -20;
+            this.MinButton.UseVisualStyleBackColor = true;
+            // 
+            // MaxButton
+            // 
+            this.MaxButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.MaxButton.CFormState = DoReMiVRP.MinMaxButton.CustomFormState.Normal;
+            this.MaxButton.DisplayText = "_";
+            this.MaxButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MaxButton.ForeColor = System.Drawing.Color.White;
+            this.MaxButton.Location = new System.Drawing.Point(86, 0);
+            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
+            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.MaxButton.Name = "MaxButton";
+            this.MaxButton.Size = new System.Drawing.Size(31, 36);
+            this.MaxButton.TabIndex = 9;
+            this.MaxButton.Text = "minMaxButton1";
+            this.MaxButton.TextLocation_X = 8;
+            this.MaxButton.TextLocation_Y = 6;
+            this.MaxButton.UseVisualStyleBackColor = true;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.CloseButton.DisplayText = "X";
+            this.CloseButton.Dock = System.Windows.Forms.DockStyle.Right;
+            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloseButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseButton.ForeColor = System.Drawing.Color.White;
+            this.CloseButton.Location = new System.Drawing.Point(117, 0);
+            this.CloseButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
+            this.CloseButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(31, 36);
+            this.CloseButton.TabIndex = 8;
+            this.CloseButton.Text = "X";
+            this.CloseButton.TextLocation_X = 6;
+            this.CloseButton.TextLocation_Y = 1;
+            this.CloseButton.UseVisualStyleBackColor = true;
             // 
             // panel7
             // 
@@ -494,352 +822,24 @@
             this.RightBottomPanel.Size = new System.Drawing.Size(19, 2);
             this.RightBottomPanel.TabIndex = 34;
             // 
-            // help_button
+            // buttonZ2
             // 
-            this.help_button.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.help_button.ChangeColorMouseHC = true;
-            this.help_button.DisplayText = "Help";
-            this.help_button.Dock = System.Windows.Forms.DockStyle.Top;
-            this.help_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.help_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.help_button.ForeColor = System.Drawing.Color.White;
-            this.help_button.Location = new System.Drawing.Point(0, 140);
-            this.help_button.MouseClickColor1 = System.Drawing.Color.Black;
-            this.help_button.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.help_button.Name = "help_button";
-            this.help_button.Size = new System.Drawing.Size(160, 35);
-            this.help_button.TabIndex = 30;
-            this.help_button.Text = "Help";
-            this.help_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.help_button.TextLocation_X = 24;
-            this.help_button.TextLocation_Y = 6;
-            this.help_button.UseVisualStyleBackColor = true;
-            // 
-            // run_button
-            // 
-            this.run_button.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.run_button.ChangeColorMouseHC = true;
-            this.run_button.DisplayText = "Run";
-            this.run_button.Dock = System.Windows.Forms.DockStyle.Top;
-            this.run_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.run_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.run_button.ForeColor = System.Drawing.Color.White;
-            this.run_button.Location = new System.Drawing.Point(0, 105);
-            this.run_button.MouseClickColor1 = System.Drawing.Color.Black;
-            this.run_button.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.run_button.Name = "run_button";
-            this.run_button.Size = new System.Drawing.Size(160, 35);
-            this.run_button.TabIndex = 29;
-            this.run_button.Text = "Run";
-            this.run_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.run_button.TextLocation_X = 24;
-            this.run_button.TextLocation_Y = 6;
-            this.run_button.UseVisualStyleBackColor = true;
-            // 
-            // view_button
-            // 
-            this.view_button.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.view_button.ChangeColorMouseHC = true;
-            this.view_button.DisplayText = "View";
-            this.view_button.Dock = System.Windows.Forms.DockStyle.Top;
-            this.view_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.view_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.view_button.ForeColor = System.Drawing.Color.White;
-            this.view_button.Location = new System.Drawing.Point(0, 70);
-            this.view_button.MouseClickColor1 = System.Drawing.Color.Black;
-            this.view_button.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.view_button.Name = "view_button";
-            this.view_button.Size = new System.Drawing.Size(160, 35);
-            this.view_button.TabIndex = 28;
-            this.view_button.Text = "View";
-            this.view_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.view_button.TextLocation_X = 24;
-            this.view_button.TextLocation_Y = 6;
-            this.view_button.UseVisualStyleBackColor = true;
-            // 
-            // edit_button
-            // 
-            this.edit_button.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.edit_button.ChangeColorMouseHC = true;
-            this.edit_button.DisplayText = "Edit";
-            this.edit_button.Dock = System.Windows.Forms.DockStyle.Top;
-            this.edit_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.edit_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.edit_button.ForeColor = System.Drawing.Color.White;
-            this.edit_button.Location = new System.Drawing.Point(0, 35);
-            this.edit_button.MouseClickColor1 = System.Drawing.Color.Black;
-            this.edit_button.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.edit_button.Name = "edit_button";
-            this.edit_button.Size = new System.Drawing.Size(160, 35);
-            this.edit_button.TabIndex = 27;
-            this.edit_button.Text = "Edit";
-            this.edit_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.edit_button.TextLocation_X = 24;
-            this.edit_button.TextLocation_Y = 6;
-            this.edit_button.UseVisualStyleBackColor = true;
-            // 
-            // file_button
-            // 
-            this.file_button.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
-            this.file_button.ChangeColorMouseHC = true;
-            this.file_button.DisplayText = "File";
-            this.file_button.Dock = System.Windows.Forms.DockStyle.Top;
-            this.file_button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.file_button.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.file_button.ForeColor = System.Drawing.Color.White;
-            this.file_button.Location = new System.Drawing.Point(0, 0);
-            this.file_button.MouseClickColor1 = System.Drawing.Color.Black;
-            this.file_button.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.file_button.Name = "file_button";
-            this.file_button.Size = new System.Drawing.Size(160, 35);
-            this.file_button.TabIndex = 26;
-            this.file_button.Text = "File";
-            this.file_button.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.file_button.TextLocation_X = 24;
-            this.file_button.TextLocation_Y = 6;
-            this.file_button.UseVisualStyleBackColor = true;
-            // 
-            // HelpBtn
-            // 
-            this.HelpBtn.BackColor = System.Drawing.Color.Transparent;
-            this.HelpBtn.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.HelpBtn.ButtonText = "Help";
-            this.HelpBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.HelpBtn.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(40)))));
-            this.HelpBtn.FlatAppearance.BorderSize = 0;
-            this.HelpBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.HelpBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.HelpBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.HelpBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HelpBtn.ForeColor = System.Drawing.Color.White;
-            this.HelpBtn.GradientAngle = 90;
-            this.HelpBtn.Location = new System.Drawing.Point(590, 8);
-            this.HelpBtn.MouseClickColor1 = System.Drawing.Color.Black;
-            this.HelpBtn.MouseClickColor2 = System.Drawing.Color.Black;
-            this.HelpBtn.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(30)))));
-            this.HelpBtn.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(20)))), ((int)(((byte)(20)))), ((int)(((byte)(80)))));
-            this.HelpBtn.Name = "HelpBtn";
-            this.HelpBtn.ShowButtontext = true;
-            this.HelpBtn.Size = new System.Drawing.Size(145, 56);
-            this.HelpBtn.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(70)))), ((int)(((byte)(190)))));
-            this.HelpBtn.TabIndex = 21;
-            this.HelpBtn.Text = "HelpText";
-            this.HelpBtn.TextLocation_X = 51;
-            this.HelpBtn.TextLocation_Y = 18;
-            this.HelpBtn.Transparent1 = 250;
-            this.HelpBtn.Transparent2 = 250;
-            this.HelpBtn.UseVisualStyleBackColor = false;
-            // 
-            // BtnGMM
-            // 
-            this.BtnGMM.BackColor = System.Drawing.Color.Transparent;
-            this.BtnGMM.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.BtnGMM.ButtonText = "Use Gaussian MM";
-            this.BtnGMM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BtnGMM.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnGMM.FlatAppearance.BorderSize = 0;
-            this.BtnGMM.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnGMM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnGMM.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnGMM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnGMM.ForeColor = System.Drawing.Color.White;
-            this.BtnGMM.GradientAngle = 90;
-            this.BtnGMM.Location = new System.Drawing.Point(767, 8);
-            this.BtnGMM.MouseClickColor1 = System.Drawing.Color.Black;
-            this.BtnGMM.MouseClickColor2 = System.Drawing.Color.Black;
-            this.BtnGMM.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnGMM.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnGMM.Name = "BtnGMM";
-            this.BtnGMM.ShowButtontext = true;
-            this.BtnGMM.Size = new System.Drawing.Size(200, 56);
-            this.BtnGMM.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnGMM.TabIndex = 17;
-            this.BtnGMM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnGMM.TextLocation_X = 32;
-            this.BtnGMM.TextLocation_Y = 18;
-            this.BtnGMM.Transparent1 = 250;
-            this.BtnGMM.Transparent2 = 250;
-            this.BtnGMM.UseVisualStyleBackColor = false;
-            this.BtnGMM.Visible = false;
-            // 
-            // btnReset
-            // 
-            this.btnReset.BackColor = System.Drawing.Color.Transparent;
-            this.btnReset.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.btnReset.ButtonText = "Reset";
-            this.btnReset.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnReset.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnReset.FlatAppearance.BorderSize = 0;
-            this.btnReset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnReset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnReset.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReset.ForeColor = System.Drawing.Color.White;
-            this.btnReset.GradientAngle = 90;
-            this.btnReset.Location = new System.Drawing.Point(967, 8);
-            this.btnReset.MouseClickColor1 = System.Drawing.Color.Black;
-            this.btnReset.MouseClickColor2 = System.Drawing.Color.Black;
-            this.btnReset.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnReset.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.btnReset.Name = "btnReset";
-            this.btnReset.ShowButtontext = true;
-            this.btnReset.Size = new System.Drawing.Size(136, 56);
-            this.btnReset.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.btnReset.TabIndex = 16;
-            this.btnReset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReset.TextLocation_X = 44;
-            this.btnReset.TextLocation_Y = 18;
-            this.btnReset.Transparent1 = 250;
-            this.btnReset.Transparent2 = 250;
-            this.btnReset.UseVisualStyleBackColor = false;
-            // 
-            // shapedButton1
-            // 
-            this.shapedButton1.BackColor = System.Drawing.Color.Transparent;
-            this.shapedButton1.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.Circle;
-            this.shapedButton1.ButtonText = "+";
-            this.shapedButton1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.shapedButton1.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.shapedButton1.FlatAppearance.BorderSize = 0;
-            this.shapedButton1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.shapedButton1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.shapedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.shapedButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.shapedButton1.ForeColor = System.Drawing.Color.White;
-            this.shapedButton1.GradientAngle = 90;
-            this.shapedButton1.Location = new System.Drawing.Point(3, 8);
-            this.shapedButton1.MouseClickColor1 = System.Drawing.Color.Black;
-            this.shapedButton1.MouseClickColor2 = System.Drawing.Color.Black;
-            this.shapedButton1.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.shapedButton1.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.shapedButton1.Name = "shapedButton1";
-            this.shapedButton1.ShowButtontext = true;
-            this.shapedButton1.Size = new System.Drawing.Size(59, 56);
-            this.shapedButton1.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.shapedButton1.TabIndex = 6;
-            this.shapedButton1.TextLocation_X = 14;
-            this.shapedButton1.TextLocation_Y = 7;
-            this.shapedButton1.Transparent1 = 250;
-            this.shapedButton1.Transparent2 = 250;
-            this.shapedButton1.UseVisualStyleBackColor = false;
-            // 
-            // BtnKMeans
-            // 
-            this.BtnKMeans.BackColor = System.Drawing.Color.Transparent;
-            this.BtnKMeans.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.BtnKMeans.ButtonText = "Use K Means";
-            this.BtnKMeans.Dock = System.Windows.Forms.DockStyle.Right;
-            this.BtnKMeans.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnKMeans.FlatAppearance.BorderSize = 0;
-            this.BtnKMeans.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.BtnKMeans.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.BtnKMeans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BtnKMeans.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnKMeans.ForeColor = System.Drawing.Color.White;
-            this.BtnKMeans.GradientAngle = 90;
-            this.BtnKMeans.Location = new System.Drawing.Point(1103, 8);
-            this.BtnKMeans.MouseClickColor1 = System.Drawing.Color.Black;
-            this.BtnKMeans.MouseClickColor2 = System.Drawing.Color.Black;
-            this.BtnKMeans.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnKMeans.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.BtnKMeans.Name = "BtnKMeans";
-            this.BtnKMeans.ShowButtontext = true;
-            this.BtnKMeans.Size = new System.Drawing.Size(156, 56);
-            this.BtnKMeans.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.BtnKMeans.TabIndex = 10;
-            this.BtnKMeans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnKMeans.TextLocation_X = 24;
-            this.BtnKMeans.TextLocation_Y = 18;
-            this.BtnKMeans.Transparent1 = 250;
-            this.BtnKMeans.Transparent2 = 250;
-            this.BtnKMeans.UseVisualStyleBackColor = false;
-            // 
-            // CloseBtn
-            // 
-            this.CloseBtn.BackColor = System.Drawing.Color.Transparent;
-            this.CloseBtn.ButtonShape = CustomWindowsForm.ShapedButton.ButtonsShapes.RoundRect;
-            this.CloseBtn.ButtonText = "Close";
-            this.CloseBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.CloseBtn.EndColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.CloseBtn.FlatAppearance.BorderSize = 0;
-            this.CloseBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.CloseBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseBtn.ForeColor = System.Drawing.Color.White;
-            this.CloseBtn.GradientAngle = 90;
-            this.CloseBtn.Location = new System.Drawing.Point(1259, 8);
-            this.CloseBtn.MouseClickColor1 = System.Drawing.Color.Black;
-            this.CloseBtn.MouseClickColor2 = System.Drawing.Color.Black;
-            this.CloseBtn.MouseHoverColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.CloseBtn.MouseHoverColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.CloseBtn.Name = "CloseBtn";
-            this.CloseBtn.ShowButtontext = true;
-            this.CloseBtn.Size = new System.Drawing.Size(136, 56);
-            this.CloseBtn.StartColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
-            this.CloseBtn.TabIndex = 9;
-            this.CloseBtn.TextLocation_X = 44;
-            this.CloseBtn.TextLocation_Y = 18;
-            this.CloseBtn.Transparent1 = 250;
-            this.CloseBtn.Transparent2 = 250;
-            this.CloseBtn.UseVisualStyleBackColor = false;
-            // 
-            // MinButton
-            // 
-            this.MinButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.MinButton.DisplayText = "_";
-            this.MinButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MinButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MinButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MinButton.ForeColor = System.Drawing.Color.White;
-            this.MinButton.Location = new System.Drawing.Point(55, 0);
-            this.MinButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
-            this.MinButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.MinButton.Name = "MinButton";
-            this.MinButton.Size = new System.Drawing.Size(31, 36);
-            this.MinButton.TabIndex = 10;
-            this.MinButton.Text = "_";
-            this.MinButton.TextLocation_X = 6;
-            this.MinButton.TextLocation_Y = -20;
-            this.MinButton.UseVisualStyleBackColor = true;
-            // 
-            // MaxButton
-            // 
-            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.MaxButton.CFormState = CustomWindowsForm.MinMaxButton.CustomFormState.Normal;
-            this.MaxButton.DisplayText = "_";
-            this.MaxButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MaxButton.ForeColor = System.Drawing.Color.White;
-            this.MaxButton.Location = new System.Drawing.Point(86, 0);
-            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
-            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.MaxButton.Name = "MaxButton";
-            this.MaxButton.Size = new System.Drawing.Size(31, 36);
-            this.MaxButton.TabIndex = 9;
-            this.MaxButton.Text = "minMaxButton1";
-            this.MaxButton.TextLocation_X = 8;
-            this.MaxButton.TextLocation_Y = 6;
-            this.MaxButton.UseVisualStyleBackColor = true;
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
-            this.CloseButton.DisplayText = "X";
-            this.CloseButton.Dock = System.Windows.Forms.DockStyle.Right;
-            this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloseButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseButton.ForeColor = System.Drawing.Color.White;
-            this.CloseButton.Location = new System.Drawing.Point(117, 0);
-            this.CloseButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(160)))));
-            this.CloseButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(31, 36);
-            this.CloseButton.TabIndex = 8;
-            this.CloseButton.Text = "X";
-            this.CloseButton.TextLocation_X = 6;
-            this.CloseButton.TextLocation_Y = 1;
-            this.CloseButton.UseVisualStyleBackColor = true;
+            this.buttonZ2.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.buttonZ2.DisplayText = "_";
+            this.buttonZ2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonZ2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonZ2.Font = new System.Drawing.Font("Microsoft YaHei UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonZ2.ForeColor = System.Drawing.Color.White;
+            this.buttonZ2.Location = new System.Drawing.Point(86, 0);
+            this.buttonZ2.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
+            this.buttonZ2.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(140)))));
+            this.buttonZ2.Name = "buttonZ2";
+            this.buttonZ2.Size = new System.Drawing.Size(31, 36);
+            this.buttonZ2.TabIndex = 2;
+            this.buttonZ2.Text = "_";
+            this.buttonZ2.TextLocation_X = 6;
+            this.buttonZ2.TextLocation_Y = -20;
+            this.buttonZ2.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -849,20 +849,28 @@
             this.ClientSize = new System.Drawing.Size(1400, 900);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.panel1.ResumeLayout(false);
             this.panelgraph.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel13.PerformLayout();
+            this.panel12.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             this.panelSide.ResumeLayout(false);
             this.panelSide.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panelRight.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panelspace1.ResumeLayout(false);
+            this.panelspace.ResumeLayout(false);
             this.TopPanel.ResumeLayout(false);
             this.TopPanel.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -885,15 +893,12 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panelRight;
         private System.Windows.Forms.Panel panel3;
-        private ShapedButton CloseBtn;
-        private ShapedButton shapedButton1;
+       
+      
         private System.Windows.Forms.Panel TopPanel;
         private System.Windows.Forms.Label WindowTextLabel;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel5;
-        private ButtonZ MinButton;
-        private MinMaxButton MaxButton;
-        private ButtonZ CloseButton;
+       
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel LeftTopPanel;
         private System.Windows.Forms.Panel RightTopPanel;
@@ -912,8 +917,8 @@
         private System.Windows.Forms.Panel panel8;
         private ZedGraph.ZedGraphControl mapgraph;
         private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.Panel panelspace1;
-        private ShapedButton BtnKMeans;
+        private System.Windows.Forms.Panel panelspace;
+       
         private ZedGraph.ZedGraphControl maproutegraph;
         private System.Windows.Forms.Label lbVersion;
         private System.Windows.Forms.Panel panel6;
@@ -921,14 +926,29 @@
         private System.Windows.Forms.Label label1;
         internal System.Windows.Forms.Label label3;
         private ShapedButton BtnGMM;
-        private ShapedButton btnReset;
-        private ShapedButton HelpBtn;
-        private System.Windows.Forms.Panel panel10;
-        private ButtonX help_button;
-        private ButtonX run_button;
-        private ButtonX view_button;
-        private ButtonX edit_button;
-        private ButtonX file_button;
+      
+
+        private ButtonX btnEntry;
         private System.Windows.Forms.CheckBox chkBWMap;
+        private System.Windows.Forms.Label lblResult;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cboClusterSize;
+        private System.Windows.Forms.Panel panelBlock;
+        private System.Windows.Forms.Panel panel5;
+        private ButtonX btnView;
+        private ButtonX btnHelp;
+        private ShapedButton btnReset;
+        private ShapedButton BtnKMeans;
+        private System.Windows.Forms.Panel panel10;
+        private ShapedButton btnClose;
+        private ButtonZ buttonZ2;
+        private ButtonZ CloseButton;
+        private ButtonZ MinButton;
+        private MinMaxButton MaxButton;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label lblSolution;
     }
 }
