@@ -1,6 +1,6 @@
 ﻿# DoReMi Delivery Optimization System
 
-![DoReMi Vehicle Routing Problem](SystemCode/DoReMiVRP_cluster_TSP_v35/doc/DoReMiVRP.jpg)
+![DoReMi Vehicle Routing Problem](SystemCode/Miscellaneous/DoReMiVRP.jpg)
 
 ## Project members of Institute of Systems Science, National University of Singapore:
 * Chad
@@ -33,7 +33,7 @@ Our primary objective is to apply the search and optimization techniques in DoRe
 * Open SystemCode/DoReMiVRP.sln
 * Click Start
 * You could click "Help" button on how to use this program
-![Help](SystemCode/doc/Help.jpg)
+![Help](SystemCode/Miscellaneous/Help.jpg)
 
 ## Credit
 [Accord.NET Framework](http://accord-framework.net/)
