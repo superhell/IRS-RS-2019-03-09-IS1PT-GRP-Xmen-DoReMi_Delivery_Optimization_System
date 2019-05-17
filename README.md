@@ -1,6 +1,6 @@
-# DoReMi Delivery Optimization System
+﻿# DoReMi Delivery Optimization System
 
-![DoReMi Vehicle Routing Problem](SystemCode/doc/DoReMiVRP.jpg)
+![DoReMi Vehicle Routing Problem](SystemCode/DoReMiVRP_cluster_TSP_v35/doc/DoReMiVRP.jpg)
 
 ## Project members of Institute of Systems Science, National University of Singapore:
 * Chad
@@ -21,7 +21,7 @@ Our primary objective is to apply the search and optimization techniques in DoRe
 * Main report
 
 ## Video
-[Video Link](https://youtu.be/ogLJWlWqs0M)
+[![DoReMi Delivery Optimization System](https://img.youtube.com/vi/ogLJWlWqs0M/0.jpg)](https://youtu.be/ogLJWlWqs0M "DoReMi Delivery Optimization System")
 
 ## Development Tools & Environment
 ### Tools
