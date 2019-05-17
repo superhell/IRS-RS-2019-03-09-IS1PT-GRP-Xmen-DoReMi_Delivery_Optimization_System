@@ -48,7 +48,8 @@ Our primary objective is to apply the search and optimization techniques in DoRe
 ---
 ## SECTION 6 : PROJECT REPORT / PAPER
 
-* REPORT.pdf
+`<Github File Link>` : <https://github.com/IRS-RS/IRS-RS-2019-03-09-IS1PT-GRP-Xmen-DoReMi_Delivery_Optimization_System/blob/master/ProjectReport/Report.pdf>
+
 
 ---
 ## SECTION 7 : MISCELLANEOUS
