@@ -1,0 +1,41 @@
+From: Ng Choon Beng
+Sent: Tuesday, May 14, 2019 5:59:08 PM
+To: Gu Zhan; Jin Xin; Li Xin; Sun Hang; Xu Dongbin
+Subject: Re: Reasoning Systems group project - IRS-RS-2019-03-09-IS1PT-GRP-Xmen-DoReMi_Delivery_Optimization_System 
+ 
+Hi Sam,
+
+I have also attached a simple user guide for your reference.
+
+Changes made:
+1) Fixed the issue where you start off with 5 clusters at the first run.
+2) Added a new text field to show the screen mouse click map coordinates for use in point 3.
+3) Updated the order entry dialog to show city coordinates and provide a way for the user to update them.
+4) Added a Restore option in Order Entry so that a user can restore the city data file to its original state.
+
+Basically, there are 6 persons driving 6 types of trucks with difference load capacity.
+Depending on the number of clusters selected, the number of trucks will be needed.
+One truck service one route. A route is a cluster. So, 4 clusters means we need 4 trucks to travel the 4 routes.
+We are assuming that a route can be handle by a single  truck on a full day trip.
+
+My research shows that a trailer truck typically travels about 880km per day.
+And to clarify, the 10 iterations is to show how GA generates the different route plan for each cluster and how the system based on shortest distance traveled select the best route for each cluster of locations. The system only consider load capacity as a secondary criterion. The primary criterion is the shortest distance traveled.
+
+In theory, we could let the system run 50 iterations of GA, but we probably would reach very similar results before we even reach 50 iterations.
+Our GA settings are as follows:
+
+ public int populationSize = 100;
+ public int iterations = 100;
+ public EnumSelectionMethod selectionMethod = EnumSelectionMethod.Elite ;
+ public bool greedyCrossover = true;
+
+The 10 cycles of iterations are actually 10 runs of GA based on the above settings for each cluster of locations.
+So, 4 clusters, means 40 times execution of GA (4 X 10).
+The system will keep the best solution on  top.
+That is what you will notice when you open up the Summary screen by clicking the "Summary" button.
+
+
+Let me know if you have anymore inquiries.
+
+Regards,
+Chad

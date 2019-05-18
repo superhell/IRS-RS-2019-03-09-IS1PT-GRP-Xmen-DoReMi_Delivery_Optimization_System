@@ -1,13 +1,10 @@
-# DoReMi Delivery Optimization System
+﻿## SECTION 1 : PROJECT TITLE
+## DoReMi Delivery Optimization System
 
-![DoReMi Vehicle Routing Problem](SystemCode/doc/DoReMiVRP.jpg)
+![DoReMi Vehicle Routing Problem](Miscellaneous/DoReMiVRP.jpg)
 
-## Project members of Institute of Systems Science, National University of Singapore:
-* Chad
-* Jin Xin
-* Li Xin
-* Dong Bin
-* Sun Hang
+---
+## SECTION 2 : EXECUTIVE SUMMARY / PAPER ABSTRACT
 
 A delivery routing optimization system is introduced for DoReMi Books Inc. DoReMi Books Inc. is a company started in 1955 and specialize in the supply and sale of classical music scores and music books in the USA with subsidiaries in the major cities of each of the 50 states. In the previous project, our team focused on the automated system for the online music books sale transaction and order handling process as well as introduce improved stock and inventory planning and management capabilities. To further improve the intelligent business process capability, a delivery routing optimization system is necessary because it not only improve the efficiency of delivery process but also directly related to the satisfaction of customer experience.
 
@@ -17,11 +14,24 @@ Our group of five members, brainstormed and decided to build a reasoning system 
 
 Our primary objective is to apply the search and optimization techniques in DoReMi’s delivery routing system. It will significantly improve the delivery efficiency by saving the cost and time, enhance customer satisfaction, and thus competence. Eventually will benefit for the companies in the same industry area.
 
-## REPORT.pdf contains:
-* Main report
+---
+## SECTION 3 : CREDITS / PROJECT CONTRIBUTION
 
-## Video
-[Video Link](https://youtu.be/ogLJWlWqs0M)
+| Official Full Name  | Student ID (MTech Applicable)  | Work Items (Who Did What) | Email (Optional) |
+| :------------ |:---------------:| :-----| :-----|
+| Chad NG | TBD | TBD | TBD |
+| Jin Xin | TBD | TBD | TBD |
+| Dong Bin | TBD | TBD | TBD |
+| Sun Hang | TBD | TBD | TBD |
+
+
+---
+## SECTION 4 : VIDEO OF SYSTEM MODELLING & USE CASE DEMO
+
+[![DoReMi Delivery Optimization System](https://img.youtube.com/vi/ogLJWlWqs0M/0.jpg)](https://youtu.be/ogLJWlWqs0M "DoReMi Delivery Optimization System")
+
+---
+## SECTION 5 : USER GUIDE
 
 ## Development Tools & Environment
 ### Tools
@@ -33,7 +43,16 @@ Our primary objective is to apply the search and optimization techniques in DoRe
 * Open SystemCode/DoReMiVRP.sln
 * Click Start
 * You could click "Help" button on how to use this program
-![Help](SystemCode/doc/Help.jpg)
+![Help](Miscellaneous/Help.jpg)
 
-## Credit
-[Accord.NET Framework](http://accord-framework.net/)
+---
+## SECTION 6 : PROJECT REPORT / PAPER
+
+`<Github File Link>` : <https://github.com/IRS-RS/IRS-RS-2019-03-09-IS1PT-GRP-Xmen-DoReMi_Delivery_Optimization_System/blob/master/ProjectReport/Report.pdf>
+
+
+---
+## SECTION 7 : MISCELLANEOUS
+### Credit
+
+* [Accord.NET Framework](http://accord-framework.net/)
