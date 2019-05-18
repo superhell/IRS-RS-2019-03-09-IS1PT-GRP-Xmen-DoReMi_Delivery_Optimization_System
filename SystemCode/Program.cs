@@ -8,6 +8,9 @@ namespace DoReMiVRP
 {
     static class Program
     {
+
+        public static System.Windows.Forms.Form App;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +19,8 @@ namespace DoReMiVRP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            App = new MainForm();
+            Application.Run(App);
         }
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool SetProcessDPIAware();

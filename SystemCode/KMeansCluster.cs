@@ -41,20 +41,11 @@ namespace Sys.Tool
 
             Sys.Tool.Serialization.SerializeObject(ClusteredObjects, "clusteredobjects" +  ".xml");
             for (int x = 0; x < ClusterCount; x++)
-            {
-                //Sys.Tool.Serialization.SerializeObject(ClusteredObjects[x], "clusteredobjects_" + x.ToString() +".xml");
+            {  
                 ClusteredObjects[x].Clear();
-            }
-            //for (int x = 0; x < ClusterCount; x++)
-            //{
-            //    PreviousClusteredObjects[x] = (ArrayList)Sys.Tool.Serialization.DeSerializeObject("clusteredobjects_" + x.ToString() + ".xml");
-            //}
-                  
-
+            }                     
             PreviousClusteredObjects = (ArrayList[])Sys.Tool.Serialization.DeSerializeObject("clusteredobjects" + ".xml");
-           
-
-
+ 
         }
 
 

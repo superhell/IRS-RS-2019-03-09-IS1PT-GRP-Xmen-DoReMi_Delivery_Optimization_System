@@ -49,6 +49,7 @@ namespace DoReMiVRP
         double[][][] data;
         bool IsBlackWhite = false;
         bool IsProcessStarted = false;
+        private float ScreenAspectRatio = 0.0f;
 
         GeneticAlgorithm GA = new GeneticAlgorithm();
         Sys.Tool.VehiclePlan VehiclePlan = new Sys.Tool.VehiclePlan(6);
@@ -56,6 +57,7 @@ namespace DoReMiVRP
         public MainForm()
         {
             InitializeComponent();
+            ScreenAspectRatio = (float)this.Width / (float)this.Height;
 
             this.TopPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
             this.TopPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
@@ -104,7 +106,10 @@ namespace DoReMiVRP
             this.panelSide.Width = 160; //must not be changed
             this.Width = 1400; //must not be changed
             this.Height = 900; //must not be changed
-        
+            
+
+            //setup panelBlock, use to hide buttons when processing to avoid submitting duplicate user clicks            
+            this.panelBlock.Location = new Point(960, 6);
 
             //Show mapgraph size
             txtXY.Text = mapgraph.Width.ToString() + "," + mapgraph.Height.ToString();
@@ -137,7 +142,7 @@ namespace DoReMiVRP
                 if (cboClusterSize.Text.Trim() == "0") { cboClusterSize.Text = "4"; }
                 this.ClusterCount = int.Parse(cboClusterSize.Text);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 cboClusterSize.Text = "4"; this.ClusterCount = 4;
             }
@@ -178,11 +183,10 @@ namespace DoReMiVRP
             var x = ((MouseEventArgs)e).X  ;
             var y = ((MouseEventArgs)e).Y  ;
 
-            SetCoordinates(x, y);
-
+            SetCoordinates(x, y, true);        
         }
 
-        private void SetCoordinates(int x, int y)
+        private void SetCoordinates(int x, int y,  bool IsSet = false)
         {
             //1420, 760
             //cartesian coordinates
@@ -191,22 +195,21 @@ namespace DoReMiVRP
 
             float mx = 0;
             float my = 0;
+            float LX = 64.0f / 1016.0f; //constant
+            float RX = 24.0f / 1016.0f;  //constant
+            float TY = 34.0f / 658.0f; //constant
+            float BY = 48.0f / 658.0f; //constant
 
-            if (mapgraph.Width > 1076)
-            {
-                x = x - 82;
-                y = y - 3 - 36;
-                mx = (1482.0f / 2.0f);
-                my = (762.0f / 2.0f);
-            }
-            else
-            {
-                x = x - 65;
-                y = y - 35;
-                mx = (986.0f / 2.0f);
-                my = (604.0f / 2.0f);
-            }
+            int workingAreaX = this.mapgraph.Width - (int)(LX * this.mapgraph.Width) - (int)(RX * this.mapgraph.Width); //928
+            int workingAreaY = this.mapgraph.Height - (int)(BY * this.mapgraph.Height) - (int)(TY * this.mapgraph.Height); //578
 
+
+            x = x - (int)(LX * this.mapgraph.Width); //from left of map image, 64  is the distance from edge of image to the edge of Y-axis 
+            y = y - (int)(TY * this.mapgraph.Height); //from top of map image, 34 is the distance from edge of image to the edge of top X-axis 
+            mx = (workingAreaX / 2.0f);
+            my = (workingAreaY / 2.0f);
+
+    
 
             float fx = 10.0f / mx;
             float fy = 10.0f / my;
@@ -221,6 +224,14 @@ namespace DoReMiVRP
 
             txtFinal.Text = x1.ToString() + ", " + y1.ToString();
             //txtXY.Text = x.ToString() + "," + y.ToString();
+            if (IsSet)
+            {
+                DoReMiVRP.CityLocation.IsUtilized = false;
+                DoReMiVRP.CityLocation.X = (float)Math.Round(x1,6);
+                DoReMiVRP.CityLocation.Y = (float)Math.Round(y1,6);
+                txtSetCoordinates.Text = x1.ToString() + ", " + y1.ToString();
+
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -241,8 +252,9 @@ namespace DoReMiVRP
         }
         private void Init()
         {
-             
-          
+
+
+
             k = this.ClusterCount;
 
             Sys.Tool.KmeansCluster.Route.ClusterCount = ClusterCount;
@@ -370,6 +382,7 @@ namespace DoReMiVRP
         /// 
         private void btnCompute_Click(object sender, EventArgs e)
         {
+            //**************** This is not used. Ignored ****************
             // Create a new Gaussian Mixture Model
             var gmm = new GaussianMixtureModel(k);
 
@@ -398,10 +411,12 @@ namespace DoReMiVRP
             // Creates and computes a new 
             // K-Means clustering algorithm:
 
-           // GenerateMapData();
+           
 
             k = this.ClusterCount;
             Sys.Tool.KmeansCluster.Route.ClusterCount = ClusterCount;
+
+            GenerateMapData();
 
             //***********************************************
             //Reset 
@@ -469,43 +484,56 @@ namespace DoReMiVRP
                 ArrayList CityList = Sys.Tool.KmeansCluster.CityList;
                 string[] data = CityList[0].ToString().Split(',');
 
+             
+                    //*************************************************************************
+                    // Store clustered points for creating the final TSP
+                    // Depot - center point, weight  not required
+                    //*************************************************************************
+                    if (Item.Color == Color.FromArgb(0, 0, 51))
+                    {
+                        Item.Color = Color.OrangeRed;
+                        //Store city centre for each cluster
+                        ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]), 0);
+                        Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
+                    }
+                    if (Item.Color == Color.FromArgb(0, 0, 255))
+                    {
+                        Item.Color = Color.Blue;
+                        //Store city centre for each cluster
+                        ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]), 0);
+                        Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
+                    }
+                    if (Item.Color == Color.FromArgb(255, 0, 0))
+                    {
+                        Item.Color = Color.DarkRed;
+                        //Store city centre for each cluster
+                        ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]), 0);
+                        Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
+                    }
+                    if (Item.Color == Color.FromArgb(0, 255, 0))
+                    {
+                        Item.Color = Color.Green;
+                        //Store city centre for each cluster
+                        ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]), 0);
+                        Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
+                    }
+                    try {  
+                    if (Item.Color == Color.FromArgb(255, 0, 182))
+                    {
+                        Item.Color = Color.DeepPink;
+                        //Store city centre for each cluster
+                        ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]), 0);
+                        Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
+                    }
+                    //*************************************************************************
+                     }
+                        catch (Exception ex)
+                     {
 
-                //*************************************************************************
-                // Store clustered points for creating the final TSP
-                // Depot - center point, weight  not required
-                //*************************************************************************
-                if (Item.Color == Color.FromArgb(0, 0, 51)) {
-                    Item.Color = Color.OrangeRed;
-                    //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
-                    Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
-                }
-                if (Item.Color == Color.FromArgb(0, 0, 255)) {
-                    Item.Color = Color.Blue;
-                    //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
-                    Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
-                }
-                if (Item.Color == Color.FromArgb(255, 0, 0)) {
-                    Item.Color = Color.DarkRed;
-                    //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
-                    Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
-                }
-                if (Item.Color == Color.FromArgb(0, 255, 0)) {
-                    Item.Color = Color.Green;
-                    //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]),0 );
-                    Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
-                }
-                if (Item.Color == Color.FromArgb(255, 0, 182))
-                {
-                    Item.Color = Color.DeepPink;
-                    //Store city centre for each cluster
-                    ClusterData obj = new ClusterData(Item.Color, float.Parse(data[1]), float.Parse(data[2]), 0);
-                    Sys.Tool.KmeansCluster.ClusteredObjects[c].Add(obj);
-                }
-                //*************************************************************************
+                         throw ex;
+                     }
+
+
 
 
 
@@ -1063,15 +1091,39 @@ namespace DoReMiVRP
                 _normalWindowLocation = this.Location;
 
                 Rectangle rect = Screen.PrimaryScreen.WorkingArea;
-                this.Location = new Point(0, 0);
-                this.Size = new System.Drawing.Size(rect.Width, rect.Height);
+                //this.Location = new Point(0, 0);
+                //this.Size = new System.Drawing.Size( rect.Width , rect.Height);
+                this.Size = GetOptimumScreenSize(rect);
+                this.Location = new Point((Screen.PrimaryScreen.WorkingArea.Width - this.Size.Width) / 2, (Screen.PrimaryScreen.WorkingArea.Height - this.Size.Height) / 2);
                 toolTip1.SetToolTip(MaxButton, "Restore Down");
                 MaxButton.CFormState = MinMaxButton.CustomFormState.Maximize;
                 isWindowMaximized = true;
+               
             }
         }
 
-       
+       private Size GetOptimumScreenSize(Rectangle rect)
+        {
+             
+            int newHeight = (int)(rect.Width / this.ScreenAspectRatio);
+            int newWidth = (int)(rect.Height * this.ScreenAspectRatio);
+            
+            if (newHeight > (Screen.PrimaryScreen.WorkingArea.Height))
+            {
+                rect = new Rectangle(rect.X, rect.Y, newWidth, newHeight-64);
+                GetOptimumScreenSize(rect);
+            } else
+            {               
+                newWidth = (int)(newHeight * this.ScreenAspectRatio);
+                this.Width = newWidth;
+                this.Height = newHeight;
+                return new Size(newWidth, newHeight);
+            }
+            
+            return new Size(newWidth, newHeight);
+
+
+        }
 
 
 
@@ -1383,7 +1435,7 @@ namespace DoReMiVRP
             FormEntry Entry = new FormEntry();
             this.AddOwnedForm(Entry);
             Entry.ShowDialog(this);
-
+            if (DoReMiVRP.CityLocation.IsUtilized) txtSetCoordinates.Text = "";
             if (Sys.Tool.KmeansCluster.IsMapDataEdited)
             {
                 //reset map
@@ -1407,6 +1459,6 @@ namespace DoReMiVRP
             Help.ShowDialog(this);
         }
 
-      
+    
     }
 }

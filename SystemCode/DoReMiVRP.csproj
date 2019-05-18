@@ -40,7 +40,7 @@
       <HintPath>Lib\Accord.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Accord.Genetic">
-      <HintPath>Lib\Accord.Genetic.dll</HintPath>
+      <HintPath>..\DoReMiVRP_TSP\Lib\Accord.Genetic.dll</HintPath>
     </Reference>
     <Reference Include="Accord.MachineLearning">
       <HintPath>Lib\Accord.MachineLearning.dll</HintPath>
@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CityItem.cs" />
+    <Compile Include="CityLocation.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="FormEntry.cs">
       <SubType>Form</SubType>
@@ -163,9 +164,6 @@
     <None Include="bin\Debug\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>xcopy /y $(ProjectDir)Resources\*  $(ProjectDir)$(OutDir)</PostBuildEvent>
-  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

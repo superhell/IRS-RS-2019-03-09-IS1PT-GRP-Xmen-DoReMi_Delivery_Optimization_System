@@ -16,6 +16,10 @@ namespace DoReMiVRP
     {
         private List<CityItem> result = null;
         private String FileName = @"iowa_map.txt";
+        private string OriginalFile = @"iowa_map.bak";
+        private bool isTopPanelDragged = false;
+        Point offset;
+        Point _normalWindowLocation = Point.Empty;
 
         public FormEntry()
         {
@@ -25,27 +29,45 @@ namespace DoReMiVRP
             DataGridViewCellValidatingEventHandler(dataGridView1_CellValidating);
             this.EntryList.CellEndEdit += new
                 DataGridViewCellEventHandler(dataGridView1_CellEndEdit);
+
+            this.TopPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
+            this.TopPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
+            this.TopPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
         }
 
         private void FormEntry_Load(object sender, EventArgs e)
         {
+            
+            btnUpdateXY.Visible = (DoReMiVRP.CityLocation.X != 0 && DoReMiVRP.CityLocation.Y != 0);
+            if (DoReMiVRP.CityLocation.X != 0 && DoReMiVRP.CityLocation.Y != 0)
+            {
+                lbXYDisplay.Text = DoReMiVRP.CityLocation.X.ToString() + ", " + DoReMiVRP.CityLocation.Y.ToString();
+            }
+
+            SetupGridview();
+
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+           
+        }
+
+        private void SetupGridview()
+        {
             result = LoadCsvFile(FileName);
             this.lblInfo.Text = "";
+
 
             this.EntryList.DataSource = result;
             this.EntryList.Columns[0].ReadOnly = true;
             this.EntryList.Columns[1].ReadOnly = true;
             this.EntryList.Columns[2].ReadOnly = true;
 
-            this.EntryList.Columns[1].Visible = false;
-            this.EntryList.Columns[2].Visible = false;
+            this.EntryList.Columns[1].Visible = true;
+            this.EntryList.Columns[2].Visible = true;
 
             this.EntryList.Columns[0].Width = 300;
             this.EntryList.Columns[3].Width = 73;
-
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-           
+            this.EntryList.Refresh();
         }
 
         private List<CityItem> LoadCsvFile(String filePath)
@@ -61,8 +83,8 @@ namespace DoReMiVRP
                     var record = new CityItem
                     {
                         City = csv.GetField<String>(0),
-                        X = csv.GetField<double>(1),
-                        Y = csv.GetField<double>(2),
+                        X = csv.GetField<float>(1),
+                        Y = csv.GetField<float>(2),
                         Order = csv.GetField<int>(3),
                     };
                     records.Add(record);
@@ -177,6 +199,84 @@ namespace DoReMiVRP
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnUpdateXY_Click(object sender, EventArgs e)
+        {
+            //DoReMiVRP.Program.App.txtse
+            result = (List<DoReMiVRP.CityItem>)this.EntryList.DataSource;
+
+            //Debug print test
+            //string c = result[this.EntryList.CurrentCell.RowIndex].City;
+            //string x = result[this.EntryList.CurrentCell.RowIndex].X.ToString();
+            //string y = result[this.EntryList.CurrentCell.RowIndex].Y.ToString();
+            //lbXYDisplay.Text = c + ", " + x + ", " + y;
+
+            //Update the selected row with the current selected screen map's location point
+            result[this.EntryList.CurrentCell.RowIndex].X = DoReMiVRP.CityLocation.X;
+            result[this.EntryList.CurrentCell.RowIndex].Y = DoReMiVRP.CityLocation.Y;
+            this.EntryList.DataSource = result;
+            this.EntryList.Refresh();
+            DoReMiVRP.CityLocation.IsUtilized = true;
+            DoReMiVRP.CityLocation.X = 0;
+            DoReMiVRP.CityLocation.Y = 0;
+            btnUpdateXY.Visible = false;
+
+            btnSave_Click(btnUpdateXY, null);
+
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            System.IO.File.Copy(OriginalFile, FileName, true);
+            SetupGridview();
+        }
+ 
+
+        private void TopPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isTopPanelDragged = true;
+                Point pointStartPosition = this.PointToScreen(new Point(e.X, e.Y));
+                offset = new Point();
+                offset.X = this.Location.X - pointStartPosition.X;
+                offset.Y = this.Location.Y - pointStartPosition.Y;
+            }
+            else
+            {
+                isTopPanelDragged = false;
+            }
+            
+        }
+
+        private void TopPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isTopPanelDragged)
+            {
+                Point newPoint = TopPanel.PointToScreen(new Point(e.X, e.Y));
+                newPoint.Offset(offset);
+                this.Location = newPoint;
+
+                if (this.Location.X > 2 || this.Location.Y > 2)
+                {
+                    if (this.WindowState == FormWindowState.Maximized)
+                    {
+                        this.Location = _normalWindowLocation;
+ 
+                    }
+                }
+            }
+        }
+
+
+        private void TopPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            isTopPanelDragged = false;
+            if (this.Location.Y <= 5)
+            {
+                
+            }
         }
     }
 }

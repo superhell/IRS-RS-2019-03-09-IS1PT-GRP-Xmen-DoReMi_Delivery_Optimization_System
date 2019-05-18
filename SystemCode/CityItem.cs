@@ -9,8 +9,8 @@ namespace DoReMiVRP
     internal class CityItem
     {
         public String City { get; set; }
-        public double X { get; set; }
-        public double Y { get; set; }
+        public float X { get; set; }
+        public float Y { get; set; }
         public int Order { get; set; }
     }
 }

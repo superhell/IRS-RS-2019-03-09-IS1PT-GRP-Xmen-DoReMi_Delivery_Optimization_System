@@ -48,6 +48,9 @@
             this.cboClusterSize = new System.Windows.Forms.ComboBox();
             this.chkBWMap = new System.Windows.Forms.CheckBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtSetCoordinates = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtXY = new System.Windows.Forms.TextBox();
@@ -284,7 +287,7 @@
             this.panel11.Controls.Add(this.label4);
             this.panel11.Controls.Add(this.cboClusterSize);
             this.panel11.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel11.Location = new System.Drawing.Point(6, 555);
+            this.panel11.Location = new System.Drawing.Point(6, 520);
             this.panel11.Name = "panel11";
             this.panel11.Padding = new System.Windows.Forms.Padding(4, 4, 4, 16);
             this.panel11.Size = new System.Drawing.Size(148, 67);
@@ -324,7 +327,7 @@
             this.chkBWMap.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.chkBWMap.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkBWMap.ForeColor = System.Drawing.Color.Silver;
-            this.chkBWMap.Location = new System.Drawing.Point(6, 622);
+            this.chkBWMap.Location = new System.Drawing.Point(6, 587);
             this.chkBWMap.Name = "chkBWMap";
             this.chkBWMap.Size = new System.Drawing.Size(148, 20);
             this.chkBWMap.TabIndex = 22;
@@ -334,22 +337,59 @@
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel6.Controls.Add(this.label6);
+            this.panel6.Controls.Add(this.label5);
+            this.panel6.Controls.Add(this.txtSetCoordinates);
             this.panel6.Controls.Add(this.label2);
             this.panel6.Controls.Add(this.label1);
             this.panel6.Controls.Add(this.txtXY);
             this.panel6.Controls.Add(this.txtFinal);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(6, 642);
+            this.panel6.Location = new System.Drawing.Point(6, 607);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(148, 114);
+            this.panel6.Size = new System.Drawing.Size(148, 149);
             this.panel6.TabIndex = 25;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Silver;
+            this.label6.Location = new System.Drawing.Point(10, 107);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(81, 16);
+            this.label6.TabIndex = 33;
+            this.label6.Text = "Coordinates:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Silver;
+            this.label5.Location = new System.Drawing.Point(9, 90);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(97, 16);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Selected Map\'s";
+            // 
+            // txtSetCoordinates
+            // 
+            this.txtSetCoordinates.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.txtSetCoordinates.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtSetCoordinates.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSetCoordinates.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+            this.txtSetCoordinates.Location = new System.Drawing.Point(9, 126);
+            this.txtSetCoordinates.Name = "txtSetCoordinates";
+            this.txtSetCoordinates.ReadOnly = true;
+            this.txtSetCoordinates.Size = new System.Drawing.Size(134, 15);
+            this.txtSetCoordinates.TabIndex = 31;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Silver;
-            this.label2.Location = new System.Drawing.Point(8, 57);
+            this.label2.Location = new System.Drawing.Point(8, 45);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 16);
             this.label2.TabIndex = 30;
@@ -360,7 +400,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(8, 11);
+            this.label1.Location = new System.Drawing.Point(8, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 16);
             this.label1.TabIndex = 29;
@@ -372,7 +412,7 @@
             this.txtXY.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtXY.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtXY.ForeColor = System.Drawing.Color.Silver;
-            this.txtXY.Location = new System.Drawing.Point(8, 33);
+            this.txtXY.Location = new System.Drawing.Point(8, 27);
             this.txtXY.Name = "txtXY";
             this.txtXY.Size = new System.Drawing.Size(134, 15);
             this.txtXY.TabIndex = 26;
@@ -383,7 +423,7 @@
             this.txtFinal.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtFinal.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFinal.ForeColor = System.Drawing.Color.Silver;
-            this.txtFinal.Location = new System.Drawing.Point(8, 79);
+            this.txtFinal.Location = new System.Drawing.Point(8, 66);
             this.txtFinal.Name = "txtFinal";
             this.txtFinal.Size = new System.Drawing.Size(134, 15);
             this.txtFinal.TabIndex = 29;
@@ -515,7 +555,7 @@
             // 
             // panelBlock
             // 
-            this.panelBlock.Location = new System.Drawing.Point(965, 7);
+            this.panelBlock.Location = new System.Drawing.Point(690, 8);
             this.panelBlock.Name = "panelBlock";
             this.panelBlock.Size = new System.Drawing.Size(298, 58);
             this.panelBlock.TabIndex = 35;
@@ -640,7 +680,7 @@
             this.lbVersion.Name = "lbVersion";
             this.lbVersion.Size = new System.Drawing.Size(73, 16);
             this.lbVersion.TabIndex = 21;
-            this.lbVersion.Text = "Version 3.3";
+            this.lbVersion.Text = "Version 3.5";
             // 
             // WindowTextLabel
             // 
@@ -950,5 +990,8 @@
         private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.Panel panel13;
         private System.Windows.Forms.Label lblSolution;
+        private System.Windows.Forms.TextBox txtSetCoordinates;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }
